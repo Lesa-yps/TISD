@@ -2,6 +2,7 @@
 #define WORK_WITH_FILE_H
 
 #include <stdio.h>
+#include <string.h>
 
 #include "const_struct.h"
 #include "help_func.h"
