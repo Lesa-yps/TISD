@@ -23,14 +23,14 @@
 #define ERROR_USER -2
 
 // Ограничение на размер дерева
-#define MAX_DIN_QUEUE 80000
+//#define MAX_SIZE_TREE 80000
 
 // Структура - элемент дерева
 struct Node
 {
     struct Applic *data; // Указатель на данные
-    struct Node *right;   // Указатель на правое поддерево
-    struct Node *left;   // Указатель на левое поддерево
+    struct Node *right;   // Указатель на правое поддерево (больше)
+    struct Node *left;   // Указатель на левое поддерево (меньше)
 };
 
 #endif // CONST_STRUCT_H
