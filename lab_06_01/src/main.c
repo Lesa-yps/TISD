@@ -125,5 +125,6 @@ int main(void)
         else if (user == 0)
              printf("Завершение работы ^-^\n");
     }
+    fclose(file);
     return rc;
 }
