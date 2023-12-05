@@ -24,7 +24,7 @@ int main(void)
 добавления чисел в файл и в дерево и поиск в зависимости от высоты деревьев и степени их ветвления.\n");
     file_whoose(&file);
     tree_from_file(&Head_tree, file);
-    tree_print(&Head_tree);
+    tree_print(Head_tree);
     while (user != 0)
     {
         if (user != ERROR_USER)
@@ -93,7 +93,7 @@ int main(void)
             while (scanf("%d", &num) != 1)
                 printf("Ошибка! Повторите ввод: ");
             printf("Искомый элемент:\n");
-            rc = tree_find_elem(&Head_tree, num);
+            rc = tree_find_elem(Head_tree, num);
             if (rc = ERR_NO_ELEM)
                 printf("Такого элемента нет в дереве.\n")
         }
@@ -102,7 +102,7 @@ int main(void)
             if (Head_tree == NULL)
                 printf("Дерево пустое.\n");
             else
-                rc = tree_level_node(&Head_tree);
+                tree_level_node(Head_tree);
         }
         else if (user == 6) // добавить новый элемент в файл
         {
@@ -116,11 +116,11 @@ int main(void)
         {
             file_whoose(&file);
             tree_from_file(&Head_tree, file);
-            tree_print(&Head_tree);
+            tree_print(Head_tree);
         }
         else if (user == 8) // вывести дерево
         {
-            tree_print(&Head_tree);
+            tree_print(Head_tree);
         }
         else if (user == 0)
              printf("Завершение работы ^-^\n");
