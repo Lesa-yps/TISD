@@ -1,9 +1,5 @@
 #include "work_with_tree.h"
 
-struct Node* node_create(int num);
-void node_print(struct Node *node, void *param);
-void node_free(struct Node *node, void *param);
-
 void btree_export_to_dot(FILE *f, const char *tree_name, struct Node *tree);
 
 int tree_from_file(struct Node **Head_tree, FILE *file)
@@ -40,12 +36,9 @@ void tree_traversal(struct Node *Head_tree)
 struct Node *tree_add_elem(struct Node *Head_tree, int num)
 {
     struct Node *new_node = node_create(num);
-
     int cmp;
-
-    if (Head_tree == NULL)
+    if (Head_tree == NULL || new_node == NULL)
         return new_node;
-
     cmp = strcmp(new_node->data, Head_tree->data);
     if (cmp == 0)
         printf("Внимание! Элемент уже есть в дереве! Нового элемента не появилось.\n");
@@ -57,20 +50,51 @@ struct Node *tree_add_elem(struct Node *Head_tree, int num)
     return Head_tree;
 }
 
-int tree_del_elem(struct Node **Head_tree, int num);
+// Функция find_min находит наименьший элемент
+struct Node *find_min(struct Node *Head_tree); 
 
-struct Node *tree_find_elem(struct Node *Head_tree, int num);
+struct Node *tree_del_elem(struct Node *Head_tree, int num)
 {
+    // нашли удаляемый элемент
+    struct Node *del_node = tree_find_elem(Head_tree, num);
     int cmp;
-    if (Head_tree == NULL)
+    // или не нашли(
+    if (Head_tree == NULL || del_node == NULL)
         return NULL;
-    cmp = num - Head_tree->data;
-    if (cmp == 0)
-        return Head_tree;
-    else if (cmp < 0)
-        return tree_find_elem(Head_tree->left, num);
+    // Если значения совпадают, то нашли удаляемый узел
     else
-        return tree_find_elem(Head_tree->right, num);
+    {
+        // Если у узла нет потомков, просто освобождаем память узла и возвращаем NULL
+        if (Head_tree->left == NULL && Head_tree->right == NULL)
+        {
+            free(Head_tree);
+            return NULL;
+        }
+        // Если у узла есть только один потомок (левый или правый),
+        // то возвращаем этого потомка, и связи с удаляемым узлом разрушаются
+        else if (Head_tree->left == NULL)
+        {
+            struct Node* temp = Head_tree->right;
+            free(Head_tree);
+            return temp;
+        }
+        else if (Head_tree->right == NULL)
+        {
+            struct Node* temp = Head_tree->left;
+            free(Head_tree);
+            return temp;
+        }
+        // Если у узла есть оба потомка, находим наименьший элемент в правом поддереве
+        // и заменяем текущий узел на него. Затем рекурсивно вызываем функцию для
+        // удаления найденного узла из правого поддерева
+        else
+        {
+            struct Node* temp = find_min(Head_tree->right); // Функция find_min находит наименьший элемент
+            Head_tree->data = temp->data;
+            Head_tree->right = tree_del_elem(Head_tree->right, temp->data);
+        }
+    }
+    return Head_tree;
 }
 
 void tree_level_node(struct Node *Head_tree);
@@ -96,9 +120,11 @@ void node_print(struct Node *node, void *param)
 
     printf(fmt, node->data);
 }
-void node_free(struct Node *node, void *param)
+void node_free(struct Node *node)
 {
-    free(node);
+    if (node)
+        free(node);
+    node = NULL;
 }
 
 // вывод красивого дерева

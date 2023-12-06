@@ -63,16 +63,18 @@ int main(void)
         else if (user == 2) // добавление элемента в дерево
         {
             int num = 0;
+            struct Node *Head_tree_tmp;
             printf("Введите элемент, который хотите добавить:\n");
             while (scanf("%d", &num) != 1)
                 printf("Ошибка! Повторите ввод: ");
-            rc = tree_add_elem(&Head_tree, num);
-            if (rc == ERR_SIZE)
-                printf("Ошибка! Достигнут максимальный размер дерева.\n")
-            else if (rc == ERR_MEM)
-                printf("Ошибка выделения памяти.\n")
+            Head_tree_tmp = tree_add_elem(&Head_tree, num);
+            if (Head_tree_tmp == NULL)
+                printf("Ошибка выделения памяти!\n")
             else
+            {
+                Head_tree = Head_tree_tmp;
                 printf("Добавили.\n");
+            }
         }
         else if (user == 3) // удаление элемента из дерева
         {
@@ -84,9 +86,12 @@ int main(void)
                 printf("Введите элемент, который хотите удалить:\n");
                 while (scanf("%d", &num) != 1)
                     printf("Ошибка! Повторите ввод: ");
-                rc = tree_del_elem(&Head_tree, num);
-                if (rc == ERR_NO_ELEM)
+                struct Node *Head_tree_tmp = tree_del_elem(&Head_tree, num);
+                if (Head_tree_tmp == NULL)
+                {
+                    rc = ERR_NO_ELEM;
                     printf("Ошибка удаления! Такого элемента нет в дереве.\n");
+                }
                 else
                     printf("Удалили.\n");
             }
