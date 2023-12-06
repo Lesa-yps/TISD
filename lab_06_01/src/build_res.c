@@ -26,39 +26,18 @@ char *perc_int(int time1, int time2, char buffer[])
     return buffer;
 }
 
-int build_res(double min_time_come, double max_time_come, double min_time_work, double max_time_work)
+// Сравнивается эффективность алгоритмов добавления чисел в файл и в дерево
+int build_res_add(void)
 {
+    printf("Результат сравнения функций добавления в дерево и в файл:\n");
     int rc = OK;
     ft_table_t *table = ft_create_table();
 
     char buffer[SIZE_OF_BUF];
 
     //общее время моделирования
-    double teor_all_time_static = 0.0;
-    double teor_all_time_dinam = 0.0;
-    //количество вошедших в систему заявок
-    int app_come_static = 0;
-    int app_come_dinam = 0;
-    //количество вышедших из системы заявок
-    int app_away_static = 0;
-    int app_away_dinam = 0;
-    //количествo срабатываний ОА
-    int count_work_AO_static = 0;
-    int count_work_AO_dinam = 0;
-    //время простоя аппарата
-    double stay_time_AO_static = 0.0;
-    double stay_time_AO_dinam = 0.0;
-    //практическое время работы аппарата
-    double work_time_AO_static = 0.0;
-    double work_time_AO_dinam = 0.0;
-    //теоретическое время работы аппарата
-    double teor_all_time_AO_static = 0.0;
-    double teor_all_time_AO_dinam = 0.0;
-    //погрешность
-    double err_all_time_AO_static = 0.0;
-    double err_all_time_AO_dinam = 0.0;
-
-    double one_teor_all_time_AO = 0.0;
+    double time_add_file = 0.0;
+    double time_add_tree = 0.0;
 
     char teor_all_time_static_c[SIZE_OF_BUF];
     char teor_all_time_dinam_c[SIZE_OF_BUF];
@@ -98,31 +77,8 @@ int build_res(double min_time_come, double max_time_come, double min_time_work, 
         rc = simulate_stat(0, 0, min_time_come, max_time_come, min_time_work, max_time_work, &infa_q1, &ao1);
         if (rc == ERROR)
             return rc;
-        //общее время моделирования
-        teor_all_time_static += infa_q1.time_sim;
-        //количество вошедших в систему заявок
-        app_come_static += infa_q1.count_come_app;
-        //количество вышедших из системы заявок
-        app_away_static += infa_q1.count_away_app;
-        //количествo срабатываний ОА
-        count_work_AO_static += ao1.count_work;
-        //время простоя аппарата
-        stay_time_AO_static += ao1.time_stay;
-        //практическое время работы аппарата
-        work_time_AO_static += (infa_q1.time_sim - ao1.time_stay);
-        //погрешность
-        err_all_time_AO_static += err_time_work_AO(min_time_come, max_time_come, min_time_work, max_time_work, &one_teor_all_time_AO,\
-                                                    infa_q1.time_sim);
-        //теоретическое время работы аппарата
-        teor_all_time_AO_static += one_teor_all_time_AO;
+        
     }
-    sprintf(teor_all_time_static_c, "%f", teor_all_time_static / COUNT_SORT);
-    sprintf(app_come_static_c, "%d", app_come_static / COUNT_SORT);
-    sprintf(app_away_static_c, "%d", app_away_static / COUNT_SORT);
-    sprintf(count_work_AO_static_c, "%d", count_work_AO_static / COUNT_SORT);
-    sprintf(stay_time_AO_static_c, "%f", stay_time_AO_static / COUNT_SORT);
-    sprintf(work_time_AO_static_c, "%f", work_time_AO_static / COUNT_SORT);
-    sprintf(err_all_time_AO_static_c, "%f", err_all_time_AO_static / COUNT_SORT);
     sprintf(teor_all_time_AO_static_c, "%f", teor_all_time_AO_static / COUNT_SORT);
 
     // прогон симуляции с односвязным списком
@@ -131,32 +87,8 @@ int build_res(double min_time_come, double max_time_come, double min_time_work, 
         rc = simulate_dinam(0, 0, min_time_come, max_time_come, min_time_work, max_time_work, &infa_q1, &ao1);
         if (rc == ERROR)
             return rc;
-        //общее время моделирования
-        teor_all_time_dinam += infa_q1.time_sim;
-        //количество вошедших в систему заявок
-        app_come_dinam += infa_q1.count_come_app;
-        //количество вышедших из системы заявок
-        app_away_dinam += infa_q1.count_away_app;
-        //количествo срабатываний ОА
-        count_work_AO_dinam += ao1.count_work;
-        //время простоя аппарата
-        stay_time_AO_dinam += ao1.time_stay;
-        //практическое время работы аппарата
-        work_time_AO_dinam += (infa_q1.time_sim - ao1.time_stay);
-        //погрешность
-        err_all_time_AO_dinam += err_time_work_AO(min_time_come, max_time_come, min_time_work, max_time_work, &one_teor_all_time_AO,\
-                                                    infa_q1.time_sim);
-        //теоретическое время работы аппарата
-        teor_all_time_AO_dinam += one_teor_all_time_AO;
     }
     sprintf(teor_all_time_dinam_c, "%f", teor_all_time_dinam / COUNT_SORT);
-    sprintf(app_come_dinam_c, "%d", app_come_dinam / COUNT_SORT);
-    sprintf(app_away_dinam_c, "%d", app_away_dinam / COUNT_SORT);
-    sprintf(count_work_AO_dinam_c, "%d", count_work_AO_dinam / COUNT_SORT);
-    sprintf(stay_time_AO_dinam_c, "%f", stay_time_AO_dinam / COUNT_SORT);
-    sprintf(work_time_AO_dinam_c, "%f", work_time_AO_dinam / COUNT_SORT);
-    sprintf(err_all_time_AO_dinam_c, "%f", err_all_time_AO_dinam / COUNT_SORT);
-    sprintf(teor_all_time_AO_dinam_c, "%f", teor_all_time_AO_dinam / COUNT_SORT);
 
 
     printf("    Результаты сравнения разных симуляций (время в единицах времени, память в байтах):\n");
@@ -186,3 +118,7 @@ int build_res(double min_time_come, double max_time_come, double min_time_work, 
     ft_destroy_table(table);
     return rc;
 }
+
+
+// Сравнивается эффективность поиска в зависимости от высоты деревьев и степени их ветвления
+void build_res_find(void);

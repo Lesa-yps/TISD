@@ -2,17 +2,18 @@
 #define BUILD_RES_H
 
 #include <stdio.h>
-#include <time.h>
-#include <math.h>
-#include "fort.h"
 #include <string.h>
-#include "simulate_stat.h"
-#include "simulate_dinam.h"
+#include <time.h>
+#include "fort.h"
+
+#include "work_with_file.h"
+#include "work_with_tree.h"
 
 #include "const_struct.h"
-#include "help_func.h"
 
-// функция
-int build_res(double min_time_come, double max_time_come, double min_time_work, double max_time_work);
+// Сравнивается эффективность алгоритмов добавления чисел в файл и в дерево
+int build_res_add(void);
+// Сравнивается эффективность поиска в зависимости от высоты деревьев и степени их ветвления
+void build_res_find(void);
 
 #endif // BUILD_RES_H

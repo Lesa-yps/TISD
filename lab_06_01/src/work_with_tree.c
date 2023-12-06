@@ -105,9 +105,19 @@ struct Node *tree_del_elem(struct Node *Head_tree, int num)
 }
 
 // функция считает количество узлов на данном уровне
-int tree_find_count_node_level(struct Node *Head_tree, int level_now)
+int tree_find_count_node_level(struct Node *Head_tree, int level_find)
 {
-    //!!!
+    if (level_find == 0 && Head_tree != NULL)
+        return 1;
+    else
+    {
+        int count = 0;
+        if (Head_tree->left != NULL)
+            count += tree_find_count_node_level(Head_tree->left, level_find - 1);
+        if (Head_tree->right != NULL)
+            count += tree_find_count_node_level(Head_tree->right, level_find - 1);
+        return count;
+    }
 }
 
 void tree_level_node(struct Node *Head_tree)
@@ -117,6 +127,7 @@ void tree_level_node(struct Node *Head_tree)
         printf("Дерево пусто!\n");
         return;
     }
+    printf("Количество узлов на каждом уровне в дереве:\n");
     // количества узлов на данном уровне
     int count_node_level;
     // какой уровень сейчас
