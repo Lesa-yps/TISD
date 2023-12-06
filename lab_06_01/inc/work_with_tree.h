@@ -24,6 +24,7 @@ void tree_level_node(struct Node *Head_tree);
 
 struct Node* node_create(int num);
 void node_print(struct Node *node, void *param);
+void tree_free(struct Node *Head);
 void node_free(struct Node *node);
 
 #endif // WORK_WITH_TREE_H

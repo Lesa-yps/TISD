@@ -43,9 +43,9 @@ struct Node *tree_add_elem(struct Node *Head_tree, int num)
     if (cmp == 0)
         printf("Внимание! Элемент уже есть в дереве! Нового элемента не появилось.\n");
     else if (cmp < 0)
-        Head_tree->left = btree_insert(Head_tree->left, new_node);
+        Head_tree->left = tree_add_elem(Head_tree->left, new_node);
     else
-        Head_tree->right = btree_insert(Head_tree->right, new_node);
+        Head_tree->right = tree_add_elem(Head_tree->right, new_node);
 
     return Head_tree;
 }
