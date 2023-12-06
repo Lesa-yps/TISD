@@ -68,7 +68,7 @@ int main(void)
             printf("Введите элемент, который хотите добавить:\n");
             while (scanf("%d", &num) != 1)
                 printf("Ошибка! Повторите ввод: ");
-            Head_tree_tmp = tree_add_elem(&Head_tree, num);
+            Head_tree_tmp = tree_add_elem(Head_tree, num);
             if (Head_tree_tmp == NULL)
                 printf("Ошибка выделения памяти!\n");
             else
@@ -87,7 +87,7 @@ int main(void)
                 printf("Введите элемент, который хотите удалить:\n");
                 while (scanf("%d", &num) != 1)
                     printf("Ошибка! Повторите ввод: ");
-                struct Node *Head_tree_tmp = tree_del_elem(&Head_tree, num);
+                struct Node *Head_tree_tmp = tree_del_elem(Head_tree, num);
                 if (Head_tree_tmp == NULL)
                 {
                     rc = ERR_NO_ELEM;

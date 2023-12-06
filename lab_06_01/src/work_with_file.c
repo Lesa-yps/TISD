@@ -28,7 +28,7 @@ void file_whoose(FILE **file)
                         if (err != EOF)
                         {
                             printf("Содержимое файла не корректно( Попробуйте ввести ещё раз: ");
-                            close(*file);
+                            fclose(*file);
                             *file = NULL;
                         }
                         else

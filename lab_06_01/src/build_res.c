@@ -39,6 +39,7 @@ int f_balance(int x)
 }
 int f_rand(int x)
 {
+    (void) x;
     return MIN_X + rand() / (RAND_MAX / (MAX_X - MIN_X + 1) + 1);
 }
 
@@ -86,7 +87,7 @@ double clock_add_file(int count, int (*f)(int))
 }
 
 // замеряет время добавления в дерево
-double clock_add_tree(int count, int (*f)(int))
+double clock_add_tree()
 {
     struct Node *Head;
     FILE *file = fopen(TEST_FILE_NAME, "r+");
@@ -109,7 +110,7 @@ double clock_add_tree(int count, int (*f)(int))
 // Сравнивается эффективность алгоритмов добавления чисел в файл и в дерево
 int build_res_add(void)
 {
-    srand(time);
+    srand(time(NULL));
     printf("Результат сравнения функций добавления в дерево и в файл:\n");
     int rc = OK;
     FILE *file;
@@ -118,7 +119,6 @@ int build_res_add(void)
     char buffer[SIZE_OF_BUF];
 
     // времена числа
-    double time_start = 0.0;
     // общее время добавления 5 элементов
     double time_add_file_5_side = 0.0;
     double time_add_tree_5_side = 0.0;
@@ -182,21 +182,21 @@ int build_res_add(void)
     time_add_file_5_side = clock_add_file(5, f_plus);
     sprintf(time_add_file_5_side_char, "%f", time_add_file_5_side / COUNT_SORT);
     // добавление в дерево
-    time_add_tree_5_side = clock_add_tree(5, f_plus);
+    time_add_tree_5_side = clock_add_tree();
     sprintf(time_add_tree_5_side_char, "%f", time_add_tree_5_side / COUNT_SORT);
     // 10 элементов
     // добавление в файл
     time_add_file_10_side = clock_add_file(10, f_plus);
     sprintf(time_add_file_10_side_char, "%f", time_add_file_10_side / COUNT_SORT);
     // добавление в дерево
-    time_add_tree_10_side = clock_add_tree(10, f_plus);
+    time_add_tree_10_side = clock_add_tree();
     sprintf(time_add_tree_10_side_char, "%f", time_add_tree_10_side / COUNT_SORT);
     // 20 элементов
     // добавление в файл
     time_add_file_20_side = clock_add_file(20, f_plus);
     sprintf(time_add_file_20_side_char, "%f", time_add_file_20_side / COUNT_SORT);
     // добавление в дерево
-    time_add_tree_20_side = clock_add_tree(20, f_plus);
+    time_add_tree_20_side = clock_add_tree();
     sprintf(time_add_tree_20_side_char, "%f", time_add_tree_20_side / COUNT_SORT);
 
     // элементы сбалансированны
@@ -205,21 +205,21 @@ int build_res_add(void)
     time_add_file_5_balance = clock_add_file(5, f_balance);
     sprintf(time_add_file_5_balance_char, "%f", time_add_file_5_balance / COUNT_SORT);
     // добавление в дерево
-    time_add_tree_5_balance = clock_add_tree(5, f_balance);
+    time_add_tree_5_balance = clock_add_tree();
     sprintf(time_add_tree_5_balance_char, "%f", time_add_tree_5_balance / COUNT_SORT);
     // 10 элементов
     // добавление в файл
     time_add_file_10_balance = clock_add_file(10, f_balance);
     sprintf(time_add_file_10_balance_char, "%f", time_add_file_10_balance / COUNT_SORT);
     // добавление в дерево
-    time_add_tree_10_balance = clock_add_tree(10, f_balance);
+    time_add_tree_10_balance = clock_add_tree();
     sprintf(time_add_tree_10_balance_char, "%f", time_add_tree_10_balance / COUNT_SORT);
     // 20 элементов
     // добавление в файл
     time_add_file_20_balance = clock_add_file(20, f_balance);
     sprintf(time_add_file_20_balance_char, "%f", time_add_file_20_balance / COUNT_SORT);
     // добавление в дерево
-    time_add_tree_20_balance = clock_add_tree(20, f_balance);
+    time_add_tree_20_balance = clock_add_tree();
     sprintf(time_add_tree_20_balance_char, "%f", time_add_tree_20_balance / COUNT_SORT);
 
     // элементы рандомны
@@ -228,21 +228,21 @@ int build_res_add(void)
     time_add_file_5_random = clock_add_file(5, f_rand);
     sprintf(time_add_file_5_random_char, "%f", time_add_file_5_random / COUNT_SORT);
     // добавление в дерево
-    time_add_tree_5_random = clock_add_tree(5, f_rand);
+    time_add_tree_5_random = clock_add_tree();
     sprintf(time_add_tree_5_random_char, "%f", time_add_tree_5_random / COUNT_SORT);
     // 10 элементов
     // добавление в файл
     time_add_file_10_random = clock_add_file(10, f_rand);
     sprintf(time_add_file_10_random_char, "%f", time_add_file_10_random / COUNT_SORT);
     // добавление в дерево
-    time_add_tree_10_random = clock_add_tree(10, f_rand);
+    time_add_tree_10_random = clock_add_tree();
     sprintf(time_add_tree_10_random_char, "%f", time_add_tree_10_random / COUNT_SORT);
     // 20 элементов
     // добавление в файл
     time_add_file_20_random = clock_add_file(20, f_rand);
     sprintf(time_add_file_20_random_char, "%f", time_add_file_20_random / COUNT_SORT);
     // добавление в дерево
-    time_add_tree_20_random = clock_add_tree(20, f_rand);
+    time_add_tree_20_random = clock_add_tree();
     sprintf(time_add_tree_20_random_char, "%f", time_add_tree_20_random / COUNT_SORT);
 
     mem_tree_5 = sizeof(struct Node) * (5 + 1);
@@ -319,14 +319,11 @@ double clock_find_tree(int count, int (*f)(int))
 // Сравнивается эффективность поиска в зависимости от высоты деревьев и степени их ветвления
 void build_res_find(void)
 {
-    srand(time);
+    srand(time(NULL));
     printf("Результат сравнения функций добавления в дерево и в файл:\n");
-    int rc = OK;
-    FILE *file;
     ft_table_t *table = ft_create_table();
 
     // времена числа
-    double time_start = 0.0;
     // общее время добавления 5 элементов
     double time_find_tree_5_side = 0.0;
     double time_find_tree_5_balance = 0.0;
@@ -418,4 +415,4 @@ void build_res_find(void)
 
     printf("%s\n", ft_to_string(table));
     ft_destroy_table(table);
-    return rc;
+}

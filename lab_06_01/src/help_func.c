@@ -11,3 +11,12 @@ int clean_buf(void)
     }
     return count;
 }
+
+int diff_time(double time1, double time2)
+{
+    if ((time1 - time2) < EPS && (time1 - time2) > -EPS)
+        return 0;
+    if (time1 - time2 < 0)
+        return -1;
+    return 1;
+}

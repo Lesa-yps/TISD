@@ -8,4 +8,6 @@
 
 int clean_buf(void);
 
+int diff_time(double time1, double time2);
+
 #endif // HELP_FUNC_H

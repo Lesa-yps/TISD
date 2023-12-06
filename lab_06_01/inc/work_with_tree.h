@@ -3,10 +3,11 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "const_struct.h"
 
-typedef void (*ptr_action_t)(struct tree_node_t*, void*);
+typedef void (*ptr_action_t)(struct Node*, void*);
 
 int tree_from_file(struct Node **Head_tree, FILE *file);
 

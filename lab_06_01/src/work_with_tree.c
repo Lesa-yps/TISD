@@ -6,8 +6,19 @@ int tree_from_file(struct Node **Head_tree, FILE *file)
 {
     int rc = OK;
     int x;
+    struct Node *Head_tree_tmp;
     while (fscanf(file, "%d", &x) == 1 && rc == OK)
-        rc = tree_add_elem(Head_tree, x);
+    {
+        Head_tree_tmp = tree_add_elem(*Head_tree, x);
+        if (Head_tree_tmp == NULL)
+        {
+            rc = ERR_MEM;
+            tree_free(*Head_tree);
+            printf("Ошибка выделения памяти!\n");
+        }
+        else
+            *Head_tree = Head_tree_tmp;
+    }
     return rc;
 }
 
@@ -35,17 +46,15 @@ void tree_traversal(struct Node *Head_tree)
 
 struct Node *tree_add_elem(struct Node *Head_tree, int num)
 {
-    struct Node *new_node = node_create(num);
-    int cmp;
-    if (Head_tree == NULL || new_node == NULL)
-        return new_node;
-    cmp = strcmp(new_node->data, Head_tree->data);
+    if (Head_tree == NULL)
+        return node_create(num);
+    int cmp = num - Head_tree->data;
     if (cmp == 0)
         printf("Внимание! Элемент уже есть в дереве! Нового элемента не появилось.\n");
     else if (cmp < 0)
-        Head_tree->left = tree_add_elem(Head_tree->left, new_node);
+        Head_tree->left = tree_add_elem(Head_tree->left, num);
     else
-        Head_tree->right = tree_add_elem(Head_tree->right, new_node);
+        Head_tree->right = tree_add_elem(Head_tree->right, num);
 
     return Head_tree;
 }
@@ -63,7 +72,6 @@ struct Node *tree_del_elem(struct Node *Head_tree, int num)
 {
     // нашли удаляемый элемент
     struct Node *del_node = tree_find_elem(Head_tree, num);
-    int cmp;
     // или не нашли(
     if (Head_tree == NULL || del_node == NULL)
         return NULL;
@@ -102,6 +110,19 @@ struct Node *tree_del_elem(struct Node *Head_tree, int num)
         }
     }
     return Head_tree;
+}
+
+struct Node *tree_find_elem(struct Node *Head_tree, int num)
+{
+    if (Head_tree == NULL)
+        return NULL;
+    int cmp = num - Head_tree->data;
+    if (cmp == 0)
+        return Head_tree;
+    else if (cmp < 0)
+        return tree_find_elem(Head_tree->left, num);
+    else
+        return tree_find_elem(Head_tree->right, num);
 }
 
 // функция считает количество узлов на данном уровне
@@ -161,7 +182,7 @@ struct Node* node_create(int num)
 }
 void node_print(struct Node *node, void *param)
 {
-    const int *fmt = param;
+    const char *fmt = param;
 
     printf(fmt, node->data);
 }
