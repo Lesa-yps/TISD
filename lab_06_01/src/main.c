@@ -85,7 +85,7 @@ int main(void)
                 while (scanf("%d", &num) != 1)
                     printf("Ошибка! Повторите ввод: ");
                 rc = tree_del_elem(&Head_tree, num);
-                if (rc = ERR_NO_ELEM)
+                if (rc == ERR_NO_ELEM)
                     printf("Ошибка удаления! Такого элемента нет в дереве.\n");
                 else
                     printf("Удалили.\n");
@@ -94,13 +94,18 @@ int main(void)
         else if (user == 4) // поиск элемента в дереве
         {
             int num = 0;
+            struct Node *find_node;
             printf("Введите элемент, который хотите найти:\n");
             while (scanf("%d", &num) != 1)
                 printf("Ошибка! Повторите ввод: ");
-            printf("Искомый элемент:\n");
-            rc = tree_find_elem(Head_tree, num);
-            if (rc = ERR_NO_ELEM)
+            find_node = tree_find_elem(Head_tree, num);
+            if (find_node == NULL)
+            {
+                rc = ERR_NO_ELEM;
                 printf("Такого элемента нет в дереве.\n")
+            }
+            else
+                printf("Искомый элемент: %d.\n", find_node->data);
         }
         else if (user == 5) // определить количество узлов в дереве на каждом уровне
         {
