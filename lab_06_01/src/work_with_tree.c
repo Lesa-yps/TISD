@@ -50,8 +50,14 @@ struct Node *tree_add_elem(struct Node *Head_tree, int num)
     return Head_tree;
 }
 
-// Функция find_min находит наименьший элемент
-struct Node *find_min(struct Node *Head_tree); 
+// Функция tree_find_min находит наименьший элемент
+struct Node *tree_find_min(struct Node *Head_tree)
+{
+    struct Node *current = Head_tree;
+    while (current->left != NULL)
+        current = current->left;
+    return current;
+}
 
 struct Node *tree_del_elem(struct Node *Head_tree, int num)
 {
@@ -89,7 +95,8 @@ struct Node *tree_del_elem(struct Node *Head_tree, int num)
         // удаления найденного узла из правого поддерева
         else
         {
-            struct Node* temp = find_min(Head_tree->right); // Функция find_min находит наименьший элемент
+            // Функция tree_find_min находит наименьший элемент
+            struct Node* temp = tree_find_min(Head_tree->right);
             Head_tree->data = temp->data;
             Head_tree->right = tree_del_elem(Head_tree->right, temp->data);
         }
@@ -97,7 +104,34 @@ struct Node *tree_del_elem(struct Node *Head_tree, int num)
     return Head_tree;
 }
 
-void tree_level_node(struct Node *Head_tree);
+// функция считает количество узлов на данном уровне
+int tree_find_count_node_level(struct Node *Head_tree, int level_now)
+{
+    //!!!
+}
+
+void tree_level_node(struct Node *Head_tree)
+{
+    if (Head_tree == NULL)
+    {
+        printf("Дерево пусто!\n");
+        return;
+    }
+    // количества узлов на данном уровне
+    int count_node_level;
+    // какой уровень сейчас
+    int level_now = 0;
+    do
+    {
+        // функция считает количество узлов на данном уровне
+        count_node_level = tree_find_count_node_level(Head_tree, level_now);
+        if (count_node_level != 0)
+        {
+            printf("Уровень №%d - %d узлов.\n", level_now, count_node_level);
+            level_now++;
+        }
+    } while (count_node_level != 0);
+}
 
 // базовое для работы с деревьями
 struct Node* node_create(int num)

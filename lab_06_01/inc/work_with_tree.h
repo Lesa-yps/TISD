@@ -2,6 +2,7 @@
 #define WORK_WITH_TREE_H
 
 #include <stdio.h>
+#include <string.h>
 
 #include "const_struct.h"
 
