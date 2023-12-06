@@ -21,7 +21,19 @@ void file_whoose(FILE **file)
                     if (*file == NULL)
                         printf("Ошибка: не удалось открыть файл. Попробуйте ввести путь ещё раз: ");
                     else
-                        printf("Успешно прочитано.\n");
+                    {
+                        int x;
+                        int err = 0;
+                        while ((err = fscanf(*file, "%d", &x)) == 1);
+                        if (err != EOF)
+                        {
+                            printf("Содержимое файла не корректно( Попробуйте ввести ещё раз: ");
+                            close(*file);
+                            *file = NULL;
+                        }
+                        else
+                            printf("Успешно прочитано.\n");
+                    }
                 }
                 else
                 {

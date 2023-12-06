@@ -5,7 +5,7 @@
 
 #include "const_struct.h"
 
-void tree_from_file(struct Node **Head_tree, FILE *file);
+int tree_from_file(struct Node **Head_tree, FILE *file);
 
 void tree_print(struct Node *Head_tree);
 

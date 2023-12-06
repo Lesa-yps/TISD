@@ -23,8 +23,13 @@ int main(void)
 на каждом уровне и добавляется число в файл. Сравнивается эффективность алгоритмов
 добавления чисел в файл и в дерево и поиск в зависимости от высоты деревьев и степени их ветвления.\n");
     file_whoose(&file);
-    tree_from_file(&Head_tree, file);
-    tree_print(Head_tree);
+    rc = tree_from_file(&Head_tree, file);
+    if (rc == ERR_SIZE)
+        printf("Ошибка! Достигнут максимальный размер дерева.\n")
+    else if (rc == ERR_MEM)
+        printf("Ошибка выделения памяти.\n")
+    else
+        tree_print(Head_tree);
     while (user != 0)
     {
         if (user != ERROR_USER)
@@ -115,8 +120,13 @@ int main(void)
         else if (user == 7) // выбрать новый файл для работы (дерево тоже перезапишется)
         {
             file_whoose(&file);
-            tree_from_file(&Head_tree, file);
-            tree_print(Head_tree);
+            rc = tree_from_file(&Head_tree, file);
+            if (rc == ERR_SIZE)
+                printf("Ошибка! Достигнут максимальный размер дерева.\n")
+            else if (rc == ERR_MEM)
+                printf("Ошибка выделения памяти.\n")
+            else
+                tree_print(Head_tree);
         }
         else if (user == 8) // вывести дерево
         {
