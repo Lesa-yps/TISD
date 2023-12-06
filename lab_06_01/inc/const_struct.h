@@ -7,6 +7,7 @@
 #define ERR_SIZE -1
 #define ERR_MEM 35
 #define ERR_NO_ELEM 2
+#define ERR_OPEN 3
 
 // эпсилон
 #define EPS 1e-8

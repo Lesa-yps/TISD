@@ -165,6 +165,18 @@ void node_print(struct Node *node, void *param)
 
     printf(fmt, node->data);
 }
+void tree_free(struct Node *Head)
+{
+    if (Head->left == NULL && Head->right == NULL)
+        node_free(Head);
+    else
+    {
+        if (Head->left != NULL)
+            tree_free(Head->left);
+        if (Head->right != NULL)
+            tree_free(Head->right);
+    }
+}
 void node_free(struct Node *node)
 {
     if (node)
