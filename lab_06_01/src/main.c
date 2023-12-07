@@ -29,7 +29,10 @@ int main(void)
     else if (rc == ERR_MEM)
         printf("Ошибка выделения памяти.\n");
     else
+    {
         tree_print(Head_tree);
+        printf("Файл с представлением дерева создан.\n");
+    }
     while (user != 0)
     {
         if (user != ERROR_USER)
@@ -94,7 +97,10 @@ int main(void)
                     printf("Ошибка удаления! Такого элемента нет в дереве.\n");
                 }
                 else
+                {
+                    Head_tree = Head_tree_tmp;
                     printf("Удалили.\n");
+                }
             }
         }
         else if (user == 4) // поиск элемента в дереве
@@ -137,7 +143,10 @@ int main(void)
             else if (rc == ERR_MEM)
                 printf("Ошибка выделения памяти.\n");
             else
+            {
                 tree_print(Head_tree);
+                printf("Файл с представлением дерева создан.\n");
+            }
         }
         else if (user == 8) // вывести дерево
         {

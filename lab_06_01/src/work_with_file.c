@@ -19,7 +19,15 @@ void file_whoose(FILE **file)
                     strk[strlen(strk) - 1] = '\0';
                     *file = fopen(strk, "r+");
                     if (*file == NULL)
-                        printf("Ошибка: не удалось открыть файл. Попробуйте ввести путь ещё раз: ");
+                    {
+                        *file = fopen(strk, "w");
+                        if (*file == NULL)
+                            printf("Ошибка: не удалось открыть файл. Попробуйте ввести путь ещё раз: ");
+                        else
+                        {
+                            printf("Внимание! Создан ранее не существующий файл!\n");
+                        }
+                    }
                     else
                     {
                         int x;
@@ -32,7 +40,10 @@ void file_whoose(FILE **file)
                             *file = NULL;
                         }
                         else
+                        {
+                            fseek(*file, SEEK_SET, 0);
                             printf("Успешно прочитано.\n");
+                        }
                     }
                 }
                 else
@@ -54,5 +65,5 @@ void file_add_elem(FILE *file, int num)
     // перешли в конец файла
     fseek(file, 0, SEEK_END);
     // записали число в файл
-    fprintf(file, "%d", num);  
+    fprintf(file, "%d\n", num);  
 }

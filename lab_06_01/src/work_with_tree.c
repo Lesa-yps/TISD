@@ -6,18 +6,15 @@ int tree_from_file(struct Node **Head_tree, FILE *file)
 {
     int rc = OK;
     int x;
-    struct Node *Head_tree_tmp;
     while (fscanf(file, "%d", &x) == 1 && rc == OK)
     {
-        Head_tree_tmp = tree_add_elem(*Head_tree, x);
-        if (Head_tree_tmp == NULL)
+        //printf("add %d\n", x);
+        *Head_tree = tree_add_elem(*Head_tree, x);
+        if (*Head_tree == NULL)
         {
             rc = ERR_MEM;
-            tree_free(*Head_tree);
             printf("Ошибка выделения памяти!\n");
         }
-        else
-            *Head_tree = Head_tree_tmp;
     }
     return rc;
 }
@@ -37,10 +34,9 @@ void tree_traversal(struct Node *Head_tree)
         return;
     else
     {
-        tree_print(Head_tree->left);
-        printf("left = %d\n", Head_tree->data);
-        tree_print(Head_tree->right);
-        printf("right = %d\n", Head_tree->data);
+        tree_traversal(Head_tree->left);
+        printf("%d\n", Head_tree->data);
+        tree_traversal(Head_tree->right);
     }
 }
 
