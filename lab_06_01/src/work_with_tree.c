@@ -19,6 +19,7 @@ int tree_from_file(struct Node **Head_tree, FILE *file, int talk) {
 void tree_print(struct Node *Head_tree)
 {
     FILE *f = fopen("visual.gv", "w");
+    //printf("tyt\n");
     btree_export_to_dot(f, "visual_tree", Head_tree);
     fclose(f);
 }
@@ -205,7 +206,10 @@ void btree_export_to_dot(FILE *f, const char *tree_name, struct Node *tree)
 {
     fprintf(f, "digraph %s {\n", tree_name);
 
-    btree_apply_pre(tree, node_to_dot, f);
+    if (tree != NULL && tree->left == NULL && tree->right == NULL)
+        fprintf(f, "%d;\n", tree->data);
+    else
+        btree_apply_pre(tree, node_to_dot, f);
 
     fprintf(f, "}\n");
 }

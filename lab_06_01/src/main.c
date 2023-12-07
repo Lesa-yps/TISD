@@ -92,15 +92,14 @@ int main(void)
                 printf("Введите элемент, который хотите удалить:\n");
                 while (scanf("%d", &num) != 1)
                     printf("Ошибка! Повторите ввод: ");
-                struct Node *Head_tree_tmp = tree_del_elem(Head_tree, num);
-                if (Head_tree_tmp == Head_tree)
+                if (tree_find_elem(Head_tree, num) == NULL)
                 {
                     rc = ERR_NO_ELEM;
                     printf("Ошибка удаления! Такого элемента нет в дереве.\n");
                 }
                 else
                 {
-                    Head_tree = Head_tree_tmp;
+                    Head_tree = tree_del_elem(Head_tree, num);
                     printf("Удалили.\n");
                 }
             }
