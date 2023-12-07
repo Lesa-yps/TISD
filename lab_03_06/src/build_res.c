@@ -11,7 +11,7 @@ char *lint_to_str(long int num, char buffer[])
 double perc(double time_mat, double time_vec);
 
 double calc_perc(struct Normal_mat *comb_mat, struct Normal_arr *comb_arr, struct Normal_arr *res_arr, struct Vector_mat *mat_mini, struct Vector_arr *arr_mini, struct Vector_arr *res_arr_mini,\
-                 double *time_mat, double *time_vec, int j);
+                 double *time_mat, double *time_vec, int j, long int *perc_mem_vec, long int *perc_mem_norm);
 
 // функция вычисляет время работы и оптимальную разряженность для использования векторного метода
 void build_res(struct Normal_mat *comb_mat, struct Normal_arr *comb_arr, struct Normal_arr *res_arr, struct Vector_mat *mat_mini, struct Vector_arr *arr_mini, struct Vector_arr *res_arr_mini)
@@ -19,6 +19,8 @@ void build_res(struct Normal_mat *comb_mat, struct Normal_arr *comb_arr, struct 
     int best_j = 0;
     int step_j = 20;
     int j;
+    long int perc_mem_vec = 0.0;
+    long int perc_mem_norm = 0.0;
 
     ft_table_t *table = ft_create_table();
 
@@ -48,7 +50,7 @@ void build_res(struct Normal_mat *comb_mat, struct Normal_arr *comb_arr, struct 
     for (j = 0; j <= 100; j += step_j)
     {
         //printf("%d\n", j);
-        percent = calc_perc(comb_mat, comb_arr, res_arr, mat_mini, arr_mini, res_arr_mini, &time_mat, &time_vec, j);
+        percent = calc_perc(comb_mat, comb_arr, res_arr, mat_mini, arr_mini, res_arr_mini, &time_mat, &time_vec, j, &perc_mem_vec, &perc_mem_norm);
 
         if ((j == 0) || (percent > best_percent))
         {
@@ -63,17 +65,17 @@ void build_res(struct Normal_mat *comb_mat, struct Normal_arr *comb_arr, struct 
         sprintf(perc_mat_vec, "%.2f%%", percent);
         sprintf(perc_j, "%d%%", j);
 
-        sprintf(perc_mem, "%.2f%%", perc(sizeof_arr(comb_arr) + sizeof_mat(comb_mat), sizeof_mat_vec(mat_mini) + sizeof_arr_vec(arr_mini)));
+        sprintf(perc_mem, "%.2f%%", perc(perc_mem_norm, perc_mem_vec));
 
-        sprintf(buffer2, "%li", sizeof_mat(comb_mat) + sizeof_arr(comb_arr));
-        sprintf(buffer3, "%li", sizeof_mat_vec(mat_mini) + sizeof_arr_vec(arr_mini));
+        sprintf(buffer2, "%li", perc_mem_norm);
+        sprintf(buffer3, "%li", perc_mem_vec);
         ft_u8write_ln(table, perc_j, time_vec2, buffer3, time_mat2, buffer2, perc_mat_vec, perc_mem);
 
         ft_set_cell_prop(table, FT_ANY_ROW, j / 20 + 1, FT_CPROP_TEXT_ALIGN, FT_ALIGNED_LEFT);
     }
 
 
-    percent = calc_perc(comb_mat, comb_arr, res_arr, mat_mini, arr_mini, res_arr_mini, &time_mat, &time_vec, best_j + 5);
+    percent = calc_perc(comb_mat, comb_arr, res_arr, mat_mini, arr_mini, res_arr_mini, &time_mat, &time_vec, best_j + 5, &perc_mem_vec, &perc_mem_norm);
     if (((percent > best_percent)))
     {
         best_percent = percent;
@@ -83,14 +85,14 @@ void build_res(struct Normal_mat *comb_mat, struct Normal_arr *comb_arr, struct 
     else
         step_j = 1;
     j = best_j;
-    percent = calc_perc(comb_mat, comb_arr, res_arr, mat_mini, arr_mini, res_arr_mini, &time_mat, &time_vec, j);
+    percent = calc_perc(comb_mat, comb_arr, res_arr, mat_mini, arr_mini, res_arr_mini, &time_mat, &time_vec, j, &perc_mem_vec, &perc_mem_norm);
     while (((percent > best_percent)) && j <= 100)
     {
         best_percent = percent;
         best_j = j;
         //printf("   %d\n", j);
         j += step_j;
-        percent = calc_perc(comb_mat, comb_arr, res_arr, mat_mini, arr_mini, res_arr_mini, &time_mat, &time_vec, j);
+        percent = calc_perc(comb_mat, comb_arr, res_arr, mat_mini, arr_mini, res_arr_mini, &time_mat, &time_vec, j, &perc_mem_vec, &perc_mem_norm);
     }
     sprintf(perc_j, "Лучший результат = %d%%", best_j);
     sprintf(time_mat2, "%.2f", time_mat);
@@ -99,9 +101,9 @@ void build_res(struct Normal_mat *comb_mat, struct Normal_arr *comb_arr, struct 
     sprintf(perc_mat_vec, "%.2f%%", best_percent);
     sprintf(perc_j, "Лучший вариант: %d%%", j);
 
-    sprintf(perc_mem, "%.2f%%", perc(sizeof_arr(comb_arr) + sizeof_mat(comb_mat), sizeof_mat_vec(mat_mini) + sizeof_arr_vec(arr_mini)));
-    sprintf(buffer2, "%li", sizeof_mat(comb_mat) + sizeof_arr(comb_arr));
-    sprintf(buffer3, "%li", sizeof_mat_vec(mat_mini) + sizeof_arr_vec(arr_mini));
+    sprintf(perc_mem, "%.2f%%", perc(perc_mem_norm, perc_mem_vec));
+    sprintf(buffer2, "%li", perc_mem_norm);
+    sprintf(buffer3, "%li", perc_mem_vec);
     ft_u8write_ln(table, perc_j, time_vec2, buffer3, time_mat2, buffer2, perc_mat_vec, perc_mem);
 
 
@@ -128,15 +130,15 @@ int diff_double(double time1, double time2)
 double perc(double time_mat, double time_vec)
 {
     if (diff_double(time_vec, 0) != 0)
-        return fabs(time_mat * 100.00 / time_vec - 100.00);
+        return time_mat * 100.00 / time_vec - 100.00;
     else if (diff_double(time_mat, 0) != 0)
-        return fabs(time_vec * 100.00 / time_mat - 100.00);
+        return -100.00;
     else
         return 0.0;
 }
 
 double calc_perc(struct Normal_mat *comb_mat, struct Normal_arr *comb_arr, struct Normal_arr *res_arr, struct Vector_mat *mat_mini, struct Vector_arr *arr_mini, struct Vector_arr *res_arr_mini,\
-                 double *time_mat, double *time_vec, int j)
+                 double *time_mat, double *time_vec, int j, long int *perc_mem_vec, long int *perc_mem_norm)
 {
     double time_start = 0.0;
     *time_mat = 0.0;
@@ -145,6 +147,8 @@ double calc_perc(struct Normal_mat *comb_mat, struct Normal_arr *comb_arr, struc
     zero_all(comb_mat, comb_arr, res_arr, mat_mini, arr_mini, res_arr_mini);
 
     rand_input(comb_mat, comb_arr, j);
+    matrix_to_vector(*comb_mat, mat_mini);
+    array_to_vector(*comb_arr, arr_mini);
     time_start = clock();
     for (int i = 0; i < COUNT_SORT; i++)
     {
@@ -155,13 +159,16 @@ double calc_perc(struct Normal_mat *comb_mat, struct Normal_arr *comb_arr, struc
     time_start = clock();
     for (int i = 0; i < COUNT_SORT; i++)
     {
-        // умножение нормальных матриц
+        // умножение матриц в векторном виде
         mult_vec(*mat_mini, *arr_mini, res_arr_mini);
     }
     *time_vec += clock() - time_start;
 
     *time_mat /= COUNT_SORT;
     *time_vec /= COUNT_SORT;
+
+    *perc_mem_norm = sizeof_mat(comb_mat) + sizeof_arr(comb_arr);
+    *perc_mem_vec = sizeof_mat_vec(mat_mini) + sizeof_arr_vec(arr_mini);
 
     return perc(*time_mat, *time_vec);
 }

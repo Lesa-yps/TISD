@@ -8,10 +8,6 @@ void coord_input(struct Normal_mat *name_struct1, struct Normal_arr *name_arr1, 
 void rand_input(struct Normal_mat *name_struct1, struct Normal_arr *name_arr1, int user);
 void ord_input(struct Normal_mat *name_struct1, struct Normal_arr *name_arr1, int user);
 
-// создание нового представления матрицы и массива
-int matrix_to_vector(struct Normal_mat arr1, struct Vector_mat *vec1);
-int array_to_vector(struct Normal_arr arr1, struct Vector_arr *vec1);
-
 // функция читает целое число из диапазона
 int read_int(int minik, int maxik);
 
@@ -25,9 +21,9 @@ int read_matrix(struct Normal_mat *comb_arr1, struct Vector_mat *comb_vec1, stru
     int user;
     int rc = OK;
     printf("\nПрограмма может принимать матрицу в трёх видах:\n\
-1) координатном (вводите количество точек, затем индексы, остальные элементы заполнятся нулями;\n\
+1) координатном (вводите количество точек, затем индексы, остальные элементы заполнятся нулями);\n\
 2) с рандомным заполнением по введённому проценту разряженности;\n\
-3) вручную (сначала вводится количество строк и столбцов, а затем все элементы по столбцам.\n\
+3) вручную (сначала вводится количество строк и столбцов, а затем все элементы по столбцам).\n\
 Введите выбранный ввод: ");
     // выбор метода ввода
     user = read_int(1, 3);

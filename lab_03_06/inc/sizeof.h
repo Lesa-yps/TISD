@@ -1,6 +1,7 @@
 #ifndef SIZEOF_H
 #define SIZEOF_H
 
+#include <stdio.h>
 #include "const_struct.h"
 
 long int sizeof_mat(struct Normal_mat *comb_mat);

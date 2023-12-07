@@ -12,6 +12,7 @@ long int sizeof_arr(struct Normal_arr *comb_arr)
 
 long int sizeof_mat_vec(struct Vector_mat *vec_mat)
 {
+    //printf("%d %d\n", vec_mat->count_col, vec_mat->count_elems);
     return (vec_mat->count_col * vec_mat->count_elems * 2 + 2) * sizeof(int);
 }
 
