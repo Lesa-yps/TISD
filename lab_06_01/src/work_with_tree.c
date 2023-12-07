@@ -2,16 +2,12 @@
 
 void btree_export_to_dot(FILE *f, const char *tree_name, struct Node *tree);
 
-int tree_from_file(struct Node **Head_tree, FILE *file)
-{
+int tree_from_file(struct Node **Head_tree, FILE *file, int talk) {
     int rc = OK;
     int x;
-    while (fscanf(file, "%d", &x) == 1 && rc == OK)
-    {
-        //printf("add %d\n", x);
-        *Head_tree = tree_add_elem(*Head_tree, x);
-        if (*Head_tree == NULL)
-        {
+    while (fscanf(file, "%d", &x) == 1 && rc == OK) {
+        *Head_tree = tree_add_elem(*Head_tree, x, talk);
+        if (*Head_tree == NULL) {
             rc = ERR_MEM;
             printf("Ошибка выделения памяти!\n");
         }
@@ -40,17 +36,17 @@ void tree_traversal(struct Node *Head_tree)
     }
 }
 
-struct Node *tree_add_elem(struct Node *Head_tree, int num)
+struct Node *tree_add_elem(struct Node *Head_tree, int num, int talk)
 {
     if (Head_tree == NULL)
         return node_create(num);
     int cmp = num - Head_tree->data;
-    if (cmp == 0)
-        printf("Внимание! Элемент уже есть в дереве! Нового элемента не появилось.\n");
+    if (cmp == 0 && talk)
+        printf("Внимание! Элемент %d уже есть в дереве! Нового элемента не появилось.\n", num);
     else if (cmp < 0)
-        Head_tree->left = tree_add_elem(Head_tree->left, num);
+        Head_tree->left = tree_add_elem(Head_tree->left, num, talk);
     else
-        Head_tree->right = tree_add_elem(Head_tree->right, num);
+        Head_tree->right = tree_add_elem(Head_tree->right, num, talk);
 
     return Head_tree;
 }
@@ -64,42 +60,27 @@ struct Node *tree_find_min(struct Node *Head_tree)
     return current;
 }
 
-struct Node *tree_del_elem(struct Node *Head_tree, int num)
-{
-    // нашли удаляемый элемент
-    struct Node *del_node = tree_find_elem(Head_tree, num);
-    // или не нашли(
-    if (Head_tree == NULL || del_node == NULL)
+struct Node* tree_del_elem(struct Node* Head_tree, int num) {
+    if (Head_tree == NULL) {
         return NULL;
-    // Если значения совпадают, то нашли удаляемый узел
-    else
-    {
-        // Если у узла нет потомков, просто освобождаем память узла и возвращаем NULL
-        if (Head_tree->left == NULL && Head_tree->right == NULL)
-        {
+    }
+    if (num < Head_tree->data) {
+        Head_tree->left = tree_del_elem(Head_tree->left, num);
+    } else if (num > Head_tree->data) {
+        Head_tree->right = tree_del_elem(Head_tree->right, num);
+    } else {
+        if (Head_tree->left == NULL && Head_tree->right == NULL) {
             free(Head_tree);
             return NULL;
-        }
-        // Если у узла есть только один потомок (левый или правый),
-        // то возвращаем этого потомка, и связи с удаляемым узлом разрушаются
-        else if (Head_tree->left == NULL)
-        {
+        } else if (Head_tree->left == NULL) {
             struct Node* temp = Head_tree->right;
             free(Head_tree);
             return temp;
-        }
-        else if (Head_tree->right == NULL)
-        {
+        } else if (Head_tree->right == NULL) {
             struct Node* temp = Head_tree->left;
             free(Head_tree);
             return temp;
-        }
-        // Если у узла есть оба потомка, находим наименьший элемент в правом поддереве
-        // и заменяем текущий узел на него. Затем рекурсивно вызываем функцию для
-        // удаления найденного узла из правого поддерева
-        else
-        {
-            // Функция tree_find_min находит наименьший элемент
+        } else {
             struct Node* temp = tree_find_min(Head_tree->right);
             Head_tree->data = temp->data;
             Head_tree->right = tree_del_elem(Head_tree->right, temp->data);
@@ -182,23 +163,22 @@ void node_print(struct Node *node, void *param)
 
     printf(fmt, node->data);
 }
-void tree_free(struct Node *Head)
-{
-    if (Head->left == NULL && Head->right == NULL)
-        node_free(Head);
-    else
-    {
-        if (Head->left != NULL)
-            tree_free(Head->left);
-        if (Head->right != NULL)
-            tree_free(Head->right);
-    }
+void tree_free(struct Node **Head_tree) {
+    if (*Head_tree == NULL)
+        return;
+
+    tree_free(&((*Head_tree)->left));
+    tree_free(&((*Head_tree)->right));
+
+    node_free(Head_tree);
 }
-void node_free(struct Node *node)
-{
-    if (node)
-        free(node);
-    node = NULL;
+
+void node_free(struct Node **node) {
+    if (*node)
+    {
+        free(*node);
+        *node = NULL;
+    }
 }
 
 // вывод красивого дерева

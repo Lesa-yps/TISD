@@ -104,6 +104,10 @@ clean :
 	find . -type f ! -name "*.sh" ! -name "*.c" ! -name "*.h" ! -name "*.txt" ! -name "*.md" ! -name "makefile*" ! -name ".gitkeep" ! -name ".gitignore" -exec rm {} \;
 	rm file.txt
 
+# визуалочка графа dot-ом
+visual.png : visual.gv
+	dot -Tpng $< -o $@
+
 # Закомментированная строка для генерации зависимостей
 # $(CC) -MM -Iinc $(SRC)*.c
 

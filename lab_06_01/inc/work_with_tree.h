@@ -9,13 +9,13 @@
 
 typedef void (*ptr_action_t)(struct Node*, void*);
 
-int tree_from_file(struct Node **Head_tree, FILE *file);
+int tree_from_file(struct Node **Head_tree, FILE *file, int talk);
 
 void tree_print(struct Node *Head_tree);
 
 void tree_traversal(struct Node *Head_tree);
 
-struct Node *tree_add_elem(struct Node *Head_tree, int num);
+struct Node *tree_add_elem(struct Node *Head_tree, int num, int talk);
 
 struct Node *tree_del_elem(struct Node *Head_tree, int num);
 
@@ -25,7 +25,7 @@ void tree_level_node(struct Node *Head_tree);
 
 struct Node* node_create(int num);
 void node_print(struct Node *node, void *param);
-void tree_free(struct Node *Head);
-void node_free(struct Node *node);
+void tree_free(struct Node **Head_tree);
+void node_free(struct Node **node);
 
 #endif // WORK_WITH_TREE_H

@@ -35,6 +35,7 @@ int f_balance(int x)
         x++;
     else
         x--;
+    //printf("%d\n", -x);
     return -x;
 }
 int f_rand(int x)
@@ -46,7 +47,7 @@ int f_rand(int x)
 int f_rand_add(void)
 {
     int x = MIN_X;
-    while (x <= MAX_X && x > +MIN_X)
+    while (x <= MAX_X && x >= MIN_X)
         x = MIN_X_ADD + rand() / (RAND_MAX / (MAX_X_ADD - MIN_X_ADD + 1) + 1);
     return x;
 }
@@ -79,7 +80,7 @@ double clock_add_file(int count, int (*f)(int))
         FILE *file = fopen(TEST_FILE_NAME, "r+");
         time_start = clock();
         file_add_elem(file, x);
-        time_add_file += time_start - clock();
+        time_add_file += clock() - time_start;
         fclose(file);
     }
     fill_file(count, f);
@@ -89,21 +90,21 @@ double clock_add_file(int count, int (*f)(int))
 // замеряет время добавления в дерево
 double clock_add_tree()
 {
-    struct Node *Head;
+    struct Node *Head = NULL;
     FILE *file = fopen(TEST_FILE_NAME, "r+");
-    tree_from_file(&Head, file);
+    tree_from_file(&Head, file, 0);
     double time_start = 0.0;
     double time_add_tree = 0.0;
     for (int i = 0; i < COUNT_SORT; i++)
     {
         int x = f_rand_add();
         time_start = clock();
-        tree_add_elem(Head, x);
-        time_add_tree += time_start - clock();
+        tree_add_elem(Head, x, 0);
+        time_add_tree += clock() - time_start;
         tree_del_elem(Head, x);
     }
     fclose(file);
-    tree_free(Head);
+    tree_free(&Head);
     return time_add_tree;
 }
 
@@ -111,7 +112,6 @@ double clock_add_tree()
 int build_res_add(void)
 {
     srand(time(NULL));
-    printf("Результат сравнения функций добавления в дерево и в файл:\n");
     int rc = OK;
     FILE *file;
     ft_table_t *table = ft_create_table();
@@ -298,9 +298,9 @@ int build_res_add(void)
 double clock_find_tree(int count, int (*f)(int))
 {
     fill_file(count, f);
-    struct Node *Head;
+    struct Node *Head = NULL;
     FILE *file = fopen(TEST_FILE_NAME, "r");
-    tree_from_file(&Head, file);
+    tree_from_file(&Head, file, 0);
     fclose(file);
     double time_start = 0.0;
     double time_find_tree = 0.0;
@@ -310,9 +310,9 @@ double clock_find_tree(int count, int (*f)(int))
         x = f_rand(x);
         time_start = clock();
         tree_find_elem(Head, x);
-        time_find_tree += time_start - clock();
+        time_find_tree += clock() - time_start;
     }
-    tree_free(Head);
+    tree_free(&Head);
     return time_find_tree;
 }
 
@@ -320,7 +320,6 @@ double clock_find_tree(int count, int (*f)(int))
 void build_res_find(void)
 {
     srand(time(NULL));
-    printf("Результат сравнения функций добавления в дерево и в файл:\n");
     ft_table_t *table = ft_create_table();
 
     // времена числа

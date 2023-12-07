@@ -41,7 +41,7 @@ void file_whoose(FILE **file)
                         }
                         else
                         {
-                            fseek(*file, SEEK_SET, 0);
+                            fseek(*file, 0, SEEK_SET);
                             printf("Успешно прочитано.\n");
                         }
                     }
@@ -65,5 +65,7 @@ void file_add_elem(FILE *file, int num)
     // перешли в конец файла
     fseek(file, 0, SEEK_END);
     // записали число в файл
-    fprintf(file, "%d\n", num);  
+    fprintf(file, "%d\n", num);
+    // перешли в начало файла
+    fseek(file, 0, SEEK_SET);
 }

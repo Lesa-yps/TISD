@@ -13,8 +13,8 @@
 #include "const_struct.h"
 #include "help_func.h"
 
-#define MIN_X -10
-#define MAX_X 10
+#define MIN_X -100
+#define MAX_X 100
 
 #define TEST_FILE_NAME "test.txt"
 

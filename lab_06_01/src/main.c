@@ -23,7 +23,7 @@ int main(void)
 на каждом уровне и добавляется число в файл. Сравнивается эффективность алгоритмов\n\
 добавления чисел в файл и в дерево и поиск в зависимости от высоты деревьев и степени их ветвления.\n");
     file_whoose(&file);
-    rc = tree_from_file(&Head_tree, file);
+    rc = tree_from_file(&Head_tree, file, 1);
     if (rc == ERR_SIZE)
         printf("Ошибка! Достигнут максимальный размер дерева.\n");
     else if (rc == ERR_MEM)
@@ -71,7 +71,7 @@ int main(void)
             printf("Введите элемент, который хотите добавить:\n");
             while (scanf("%d", &num) != 1)
                 printf("Ошибка! Повторите ввод: ");
-            Head_tree_tmp = tree_add_elem(Head_tree, num);
+            Head_tree_tmp = tree_add_elem(Head_tree, num, 1);
             if (Head_tree_tmp == NULL)
                 printf("Ошибка выделения памяти!\n");
             else
@@ -91,7 +91,7 @@ int main(void)
                 while (scanf("%d", &num) != 1)
                     printf("Ошибка! Повторите ввод: ");
                 struct Node *Head_tree_tmp = tree_del_elem(Head_tree, num);
-                if (Head_tree_tmp == NULL)
+                if (Head_tree_tmp == Head_tree)
                 {
                     rc = ERR_NO_ELEM;
                     printf("Ошибка удаления! Такого элемента нет в дереве.\n");
@@ -137,7 +137,8 @@ int main(void)
         else if (user == 7) // выбрать новый файл для работы (дерево тоже перезапишется)
         {
             file_whoose(&file);
-            rc = tree_from_file(&Head_tree, file);
+            tree_free(&Head_tree);
+            rc = tree_from_file(&Head_tree, file, 1);
             if (rc == ERR_SIZE)
                 printf("Ошибка! Достигнут максимальный размер дерева.\n");
             else if (rc == ERR_MEM)
@@ -163,5 +164,6 @@ int main(void)
              printf("Завершение работы ^-^\n");
     }
     fclose(file);
+    tree_free(&Head_tree);
     return rc;
 }
