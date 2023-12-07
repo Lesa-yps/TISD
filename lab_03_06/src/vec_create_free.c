@@ -12,8 +12,16 @@ int create_vec_arr(struct Vector_arr *res, int n)
 
 void free_vec_arr(struct Vector_arr *res)
 {
-    free(res->elems);
-    free(res->num_str);
+    if (res->elems)
+    {
+        free(res->elems);
+        res->elems = NULL;
+    }
+    if (res->num_str)
+    {
+        free(res->num_str);
+        res->num_str = NULL;
+    }
 }
 
 int create_vec_mat(struct Vector_mat *res, int n, int m)
@@ -30,9 +38,21 @@ int create_vec_mat(struct Vector_mat *res, int n, int m)
 
 void free_vec_mat(struct Vector_mat *res)
 {
-    free(res->elems);
-    free(res->num_str);
-    free(res->ind_elems_col);
+    if (res->elems)
+    {
+        free(res->elems);
+        res->elems = NULL;
+    }
+    if (res->num_str)
+    {
+        free(res->num_str);
+        res->num_str = NULL;
+    }
+    if (res->ind_elems_col)
+    {
+        free(res->ind_elems_col);
+        res->ind_elems_col = NULL;
+    }
 }
 
 void zero_mat(struct Normal_mat *mat)
@@ -86,9 +106,21 @@ void zero_all(struct Normal_mat *comb_mat, struct Normal_arr *comb_arr, struct N
 void free_all(struct Normal_mat *comb_mat, struct Normal_arr *comb_arr, struct Normal_arr *res_arr, struct Vector_mat *mat_mini, struct Vector_arr *arr_mini, struct Vector_arr *res_arr_mini)
 {
     free_vec_mat(mat_mini);
-    free(comb_arr->arr);
+    if (comb_arr->arr)
+    {
+        free(comb_arr->arr);
+        comb_arr->arr = NULL;
+    }
     free_vec_arr(arr_mini);
-    free(comb_mat->mat);
+    if (comb_mat->mat)
+    {
+        free(comb_mat->mat);
+        comb_mat->mat = NULL;
+    }
     free_vec_arr(res_arr_mini);
-    free(res_arr->arr);
+    if (res_arr->arr)
+    {
+        free(res_arr->arr);
+        res_arr->arr = NULL;
+    }
 }

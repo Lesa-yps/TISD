@@ -38,8 +38,8 @@ void build_res(struct Normal_mat *comb_mat, struct Normal_arr *comb_arr, struct 
     double percent;
     double best_percent = 1000000;
 
-    printf("\nРезультаты сравнения разных сортировок (время в тактах процессора, память в байтах):\n");
-    ft_u8write_ln(table, "разряженность", "векторный метод", "", "матричный метод", "", "выигрыш от векторов\nв процентах", "");
+    printf("\nРезультаты сравнения разных перемножений (время в тактах процессора, память в байтах):\n");
+    ft_u8write_ln(table, "разряженность", "векторный метод", "", "матричный метод", "", "выигрыш в процентах", "");
     ft_set_cell_span(table, 0, 1, 2);
     ft_set_cell_span(table, 0, 3, 2);
     ft_set_cell_span(table, 0, 5, 2);
@@ -115,10 +115,24 @@ void build_res(struct Normal_mat *comb_mat, struct Normal_arr *comb_arr, struct 
     ft_destroy_table(table);
 }
 
+int diff_double(double time1, double time2)
+{
+    if ((time1 - time2) < EPS && (time1 - time2) > -EPS)
+        return 0;
+    if (time1 - time2 < 0)
+        return -1;
+    return 1;
+}
+
 // выигрыш в процентах
 double perc(double time_mat, double time_vec)
 {
-    return time_mat * 100.00 / time_vec - 100.00;
+    if (diff_double(time_vec, 0) != 0)
+        return fabs(time_mat * 100.00 / time_vec - 100.00);
+    else if (diff_double(time_mat, 0) != 0)
+        return fabs(time_vec * 100.00 / time_mat - 100.00);
+    else
+        return 0.0;
 }
 
 double calc_perc(struct Normal_mat *comb_mat, struct Normal_arr *comb_arr, struct Normal_arr *res_arr, struct Vector_mat *mat_mini, struct Vector_arr *arr_mini, struct Vector_arr *res_arr_mini,\
@@ -131,20 +145,20 @@ double calc_perc(struct Normal_mat *comb_mat, struct Normal_arr *comb_arr, struc
     zero_all(comb_mat, comb_arr, res_arr, mat_mini, arr_mini, res_arr_mini);
 
     rand_input(comb_mat, comb_arr, j);
+    time_start = clock();
     for (int i = 0; i < COUNT_SORT; i++)
     {
-        time_start = clock();
         // умножение нормальных матриц
         mult_mat(*comb_mat, *comb_arr, res_arr);
-        *time_mat += clock() - time_start;
     }
+    *time_mat += clock() - time_start;
+    time_start = clock();
     for (int i = 0; i < COUNT_SORT; i++)
     {
-        time_start = clock();
         // умножение нормальных матриц
         mult_vec(*mat_mini, *arr_mini, res_arr_mini);
-        *time_vec += clock() - time_start;
     }
+    *time_vec += clock() - time_start;
 
     *time_mat /= COUNT_SORT;
     *time_vec /= COUNT_SORT;
