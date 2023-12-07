@@ -320,6 +320,7 @@ double clock_find_tree(int count, int (*f)(int))
 void build_res_find(void)
 {
     srand(time(NULL));
+    // таблица
     ft_table_t *table = ft_create_table();
 
     // времена числа
