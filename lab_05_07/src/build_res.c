@@ -87,15 +87,25 @@ int build_res(double min_time_come, double max_time_come, double min_time_work, 
     struct Inf_oueue infa_q1;
     struct AO ao1;
 
+    //общее время моделирования
+    double time_start_clock;
+    double time_static_clock = 0.0;
+    double time_dinam_clock = 0.0;
+    char time_static_clock_c[SIZE_OF_BUF];
+    char time_dinam_clock_c[SIZE_OF_BUF];
+
     int mem_static = (int) (sizeof(struct Applic) + sizeof(struct Applic*)) * (MAX_COUNT_APP) + sizeof(struct Applic*) * 3;
-    int mem_dinam = (int) (sizeof(struct Applic) + sizeof(struct Node*)) * (MAX_COUNT_APP) + sizeof(struct Applic*) * 3 + sizeof(struct Node*) * 2;
-    char perc_mem[SIZE_OF_BUF];
-    sprintf(perc_mem, "%.2f%%", fabs(mem_static * 100.0 / mem_dinam - 100.0));
+    int mem_dinam = 0;
+    char mem_static_c[SIZE_OF_BUF];
+    char mem_dinam_c[SIZE_OF_BUF];
+    sprintf(mem_static_c, "%d", mem_static);
 
     // прогон симуляции со статическим массивом
     for (int i = 0; i < COUNT_SORT; i++)
     {
+        time_start_clock = clock();
         rc = simulate_stat(0, 0, min_time_come, max_time_come, min_time_work, max_time_work, &infa_q1, &ao1);
+        time_static_clock += clock() - time_start_clock;
         if (rc == ERROR)
             return rc;
         //общее время моделирования
@@ -116,21 +126,35 @@ int build_res(double min_time_come, double max_time_come, double min_time_work, 
         //теоретическое время работы аппарата
         teor_all_time_AO_static += one_teor_all_time_AO;
     }
-    sprintf(teor_all_time_static_c, "%f", teor_all_time_static / COUNT_SORT);
-    sprintf(app_come_static_c, "%d", app_come_static / COUNT_SORT);
-    sprintf(app_away_static_c, "%d", app_away_static / COUNT_SORT);
-    sprintf(count_work_AO_static_c, "%d", count_work_AO_static / COUNT_SORT);
-    sprintf(stay_time_AO_static_c, "%f", stay_time_AO_static / COUNT_SORT);
-    sprintf(work_time_AO_static_c, "%f", work_time_AO_static / COUNT_SORT);
-    sprintf(err_all_time_AO_static_c, "%f", err_all_time_AO_static / COUNT_SORT);
-    sprintf(teor_all_time_AO_static_c, "%f", teor_all_time_AO_static / COUNT_SORT);
+    teor_all_time_static /= COUNT_SORT;
+    app_come_static /= COUNT_SORT;
+    app_away_static /= COUNT_SORT;
+    count_work_AO_static /= COUNT_SORT;
+    stay_time_AO_static /= COUNT_SORT;
+    work_time_AO_static /= COUNT_SORT;
+    err_all_time_AO_static /= COUNT_SORT;
+    teor_all_time_AO_static /= COUNT_SORT;
+    time_static_clock /= COUNT_SORT;
+    sprintf(teor_all_time_static_c, "%f", teor_all_time_static);
+    sprintf(app_come_static_c, "%d", app_come_static);
+    sprintf(app_away_static_c, "%d", app_away_static);
+    sprintf(count_work_AO_static_c, "%d", count_work_AO_static);
+    sprintf(stay_time_AO_static_c, "%f", stay_time_AO_static);
+    sprintf(work_time_AO_static_c, "%f", work_time_AO_static);
+    sprintf(err_all_time_AO_static_c, "%f", err_all_time_AO_static);
+    sprintf(teor_all_time_AO_static_c, "%f", teor_all_time_AO_static);
+    sprintf(time_static_clock_c, "%f", time_static_clock);
 
     // прогон симуляции с односвязным списком
     for (int i = 0; i < COUNT_SORT; i++)
     {
+        time_start_clock = clock();
         rc = simulate_dinam(0, 0, min_time_come, max_time_come, min_time_work, max_time_work, &infa_q1, &ao1);
+        time_dinam_clock += clock() - time_start_clock;
         if (rc == ERROR)
             return rc;
+        // память
+        mem_dinam += (int) (sizeof(struct Applic) + sizeof(struct Node*)) * (infa_q1.len_q_max) + sizeof(struct Applic*) * 3 + sizeof(struct Node*) * 2;
         //общее время моделирования
         teor_all_time_dinam += infa_q1.time_sim;
         //количество вошедших в систему заявок
@@ -149,14 +173,26 @@ int build_res(double min_time_come, double max_time_come, double min_time_work, 
         //теоретическое время работы аппарата
         teor_all_time_AO_dinam += one_teor_all_time_AO;
     }
-    sprintf(teor_all_time_dinam_c, "%f", teor_all_time_dinam / COUNT_SORT);
-    sprintf(app_come_dinam_c, "%d", app_come_dinam / COUNT_SORT);
-    sprintf(app_away_dinam_c, "%d", app_away_dinam / COUNT_SORT);
-    sprintf(count_work_AO_dinam_c, "%d", count_work_AO_dinam / COUNT_SORT);
-    sprintf(stay_time_AO_dinam_c, "%f", stay_time_AO_dinam / COUNT_SORT);
-    sprintf(work_time_AO_dinam_c, "%f", work_time_AO_dinam / COUNT_SORT);
-    sprintf(err_all_time_AO_dinam_c, "%f", err_all_time_AO_dinam / COUNT_SORT);
-    sprintf(teor_all_time_AO_dinam_c, "%f", teor_all_time_AO_dinam / COUNT_SORT);
+    teor_all_time_dinam /= COUNT_SORT;
+    app_come_dinam /= COUNT_SORT;
+    app_away_dinam /= COUNT_SORT;
+    count_work_AO_dinam /= COUNT_SORT;
+    stay_time_AO_dinam /= COUNT_SORT;
+    work_time_AO_dinam /= COUNT_SORT;
+    err_all_time_AO_dinam /= COUNT_SORT;
+    teor_all_time_AO_dinam /= COUNT_SORT;
+    mem_dinam /= COUNT_SORT;
+    time_dinam_clock /= COUNT_SORT;
+    sprintf(teor_all_time_dinam_c, "%f", teor_all_time_dinam);
+    sprintf(app_come_dinam_c, "%d", app_come_dinam);
+    sprintf(app_away_dinam_c, "%d", app_away_dinam);
+    sprintf(count_work_AO_dinam_c, "%d", count_work_AO_dinam);
+    sprintf(stay_time_AO_dinam_c, "%f", stay_time_AO_dinam);
+    sprintf(work_time_AO_dinam_c, "%f", work_time_AO_dinam);
+    sprintf(err_all_time_AO_dinam_c, "%f", err_all_time_AO_dinam);
+    sprintf(teor_all_time_AO_dinam_c, "%f", teor_all_time_AO_dinam);
+    sprintf(mem_dinam_c, "%d", mem_dinam);
+    sprintf(time_dinam_clock_c, "%f", time_dinam_clock);
 
 
     printf("    Результаты сравнения разных симуляций (время в единицах времени, память в байтах):\n");
@@ -169,6 +205,10 @@ int build_res(double min_time_come, double max_time_come, double min_time_work, 
     ft_u8write_ln(table, "Практическое время моделирования", teor_all_time_static_c, teor_all_time_dinam_c, perc_double(teor_all_time_static, teor_all_time_dinam, buffer));
     ft_u8write_ln(table, "Теоретическое время моделирования", teor_all_time_AO_static_c, teor_all_time_AO_dinam_c, perc_double(teor_all_time_AO_static, teor_all_time_AO_dinam, buffer));
     ft_u8write_ln(table, "Погрешность (%)", err_all_time_AO_static_c, err_all_time_AO_dinam_c, perc_double(err_all_time_AO_static, err_all_time_AO_dinam, buffer));
+    // разделяющая строки линия
+    ft_u8write_ln(table, "---------------------------------", "-------------------", "------------------", "------------");
+    ft_u8write_ln(table, "Память", mem_static_c, mem_dinam_c, perc_int(mem_static, mem_dinam, buffer));
+    ft_u8write_ln(table, "Время (в тактах процессора)", time_static_clock_c, time_dinam_clock_c, perc_double(time_static_clock, time_dinam_clock, buffer));
 
     ft_set_border_style(table, FT_NICE_STYLE);
     ft_set_cell_prop(table, FT_ANY_ROW, 0, FT_CPROP_TEXT_ALIGN, FT_ALIGNED_CENTER);
@@ -180,6 +220,9 @@ int build_res(double min_time_come, double max_time_come, double min_time_work, 
     ft_set_cell_prop(table, FT_ANY_ROW, 6, FT_CPROP_TEXT_ALIGN, FT_ALIGNED_LEFT);
     ft_set_cell_prop(table, FT_ANY_ROW, 7, FT_CPROP_TEXT_ALIGN, FT_ALIGNED_LEFT);
     ft_set_cell_prop(table, FT_ANY_ROW, 8, FT_CPROP_TEXT_ALIGN, FT_ALIGNED_LEFT);
+    ft_set_cell_prop(table, FT_ANY_ROW, 9, FT_CPROP_TEXT_ALIGN, FT_ALIGNED_LEFT);
+    ft_set_cell_prop(table, FT_ANY_ROW, 10, FT_CPROP_TEXT_ALIGN, FT_ALIGNED_LEFT);
+    ft_set_cell_prop(table, FT_ANY_ROW, 11, FT_CPROP_TEXT_ALIGN, FT_ALIGNED_LEFT);
     ft_set_cell_prop(table, 0, FT_ANY_COLUMN, FT_CPROP_ROW_TYPE, FT_ROW_HEADER);
 
     printf("%s\n", ft_to_string(table));

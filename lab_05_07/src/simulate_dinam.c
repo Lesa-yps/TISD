@@ -24,8 +24,9 @@ int simulate_dinam(int talk, int own, double min_time_come, double max_time_come
     if (hat_for_get(&time_come_app, &app_come, min_time_come, max_time_come, min_time_work, max_time_work))
         return ERROR;
     // пока количество обработанных заявок меньше MAX_COUNT_APP
-    while (infa_q1->count_away_app < MAX_COUNT_APP)
+    while (infa_q1->count_away_app < NEED_COUNT_AWAY_APP)
     {
+        //printf("Verx %d\n", infa_q1->count_away_app);
         // если время прихода новой заявки кончилось
         if ((diff_time(time_come_app, 0) <= 0) && (app_come != NULL))
         {
@@ -71,13 +72,13 @@ int simulate_dinam(int talk, int own, double min_time_come, double max_time_come
             time_work_app = app_now->time_work;
             app_now->count_work++;
             ao1->count_work += 1;
-            // если количество заявок кратно REPORT_COUNT_APP и больше нуля выводим информацию
-            if (ao1->count_work % REPORT_COUNT_APP == 0 && ao1->count_work > 0 && own)
-                report_part_work(*infa_q1);
             if (app_now->count_work == MAX_COUNT_WORK1)
             {
                 print_ptr("удаляем", app_now, talk);
                 infa_q1->count_away_app++;
+                // если количество заявок кратно REPORT_COUNT_APP и больше нуля выводим информацию
+                if (infa_q1->count_away_app % REPORT_COUNT_APP == 0 && ao1->count_work > 0 && own)
+                    report_part_work(*infa_q1);
             }
         }
         // обновляем время, если аппарат занят

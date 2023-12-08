@@ -56,9 +56,9 @@ double err_time_work_AO(double min_time_come, double max_time_come, double min_t
     double sr_time_work = min_time_work + (max_time_work - min_time_work) / 2;
     //printf("work = %f come = %f\n", sr_time_work, sr_time_come);
     if (diff_time(sr_time_come, sr_time_work * MAX_COUNT_WORK1) > 0)
-        *teor_time_work = sr_time_come * MAX_COUNT_APP;
+        *teor_time_work = sr_time_come * NEED_COUNT_AWAY_APP;
     else
-        *teor_time_work = sr_time_work * MAX_COUNT_WORK1 * MAX_COUNT_APP;
+        *teor_time_work = sr_time_work * MAX_COUNT_WORK1 * NEED_COUNT_AWAY_APP;
     if (diff_time(prac_time_work, 0) != 0)
         return fabs(*teor_time_work * 100.0 / prac_time_work - 100.0);
     else if (diff_time(*teor_time_work, 0) != 0)

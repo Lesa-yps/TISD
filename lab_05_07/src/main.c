@@ -84,7 +84,8 @@ int main(void)
         }
         else if (user == 1)
         {
-             ask_talk(&talk);
+             //ask_talk(&talk);
+             talk = 0;
              printf("    Статическая симуляция запущена...\n");
              rc = simulate_stat(talk, own, min_time_come, max_time_come, min_time_work, max_time_work, &infa_q1, &ao1);
         }

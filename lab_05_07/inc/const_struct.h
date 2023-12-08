@@ -20,8 +20,9 @@
 #define ERROR_USER -2
 
 #define MAX_COUNT_WORK1 5
-#define MAX_COUNT_APP 1000
+#define MAX_COUNT_APP 10000
 #define REPORT_COUNT_APP 100
+#define NEED_COUNT_AWAY_APP 1000
 
 // Ограничение на размер динамической очереди
 #define MAX_DIN_QUEUE 80000
