@@ -42,12 +42,12 @@ int main(void)
         }
         else if (user == 1)
         {
-             printf("    Статическая симуляция запущена...\n");
+             printf("    Статическая реализация запущена...\n");
              rc = simulate_stat(own, &infa_q1);
         }
         else if (user == 2)
         {
-             printf("    Динамическая симуляция запущена...\n");
+             printf("    Динамическая реализация запущена...\n");
              rc = simulate_dinam(own, &infa_q1);
         }
         else if (user == 3)
