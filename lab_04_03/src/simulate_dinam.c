@@ -42,10 +42,10 @@ int simulate_dinam(int own, struct Inf_stack *infa_q1)
                 work_din(&head, infa_q1, 0, &del_adress);
             user = 0;
         }
-        else if (scanf("%d", &user) != 1 || user < 0 || user > 4)
+        else if (scanf("%d", &user) != 1 || user < 0 || user > 5)
         {
             clean_buf();
-            printf("Ошибка ввода! Введите цифру от 0 до 4: ");
+            printf("Ошибка ввода! Введите цифру от 0 до 5: ");
             user = ERROR_USER;
         }
         else if (user == 1)

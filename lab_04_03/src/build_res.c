@@ -52,7 +52,7 @@ int build_res()
 
     int count_elems = 0;
     printf("Введите количество элементов в стеке: ");
-    read_int(&count_elems, 0, MAX_COUNT_ELEM_STAT);
+    read_int(&count_elems, 1, MAX_COUNT_ELEM_STAT);
 
     time_start = clock();
     // прогон симуляции со статическим массивом
@@ -61,12 +61,13 @@ int build_res()
         rc = simulate_stat(count_elems, &infa_q1);
         if (rc == ERROR)
             return rc;
-        mem_static += (int) (infa_q1.len_strk_max * sizeof(char));
     }
     time_static = (clock() - time_start);
 
-    sprintf(time_static_c, "%f", time_static / COUNT_SORT);
-    sprintf(mem_static_c, "%d", mem_static / COUNT_SORT + (int) (MAX_COUNT_ELEM_STAT * sizeof(int)));
+    mem_static = (int) (MAX_COUNT_ELEM_STAT * SIZE_OF_STR * sizeof(char));
+    time_static /= COUNT_SORT;
+    sprintf(time_static_c, "%f", time_static);
+    sprintf(mem_static_c, "%d", mem_static);
 
     time_start = clock();
     // прогон симуляции с односвязным списком
@@ -79,8 +80,10 @@ int build_res()
     }
     time_dinam = (clock() - time_start);
 
-    sprintf(time_dinam_c, "%f", time_dinam / COUNT_SORT);
-    sprintf(mem_dinam_c, "%d", mem_dinam / COUNT_SORT);
+    time_dinam /= COUNT_SORT;
+    mem_dinam /= COUNT_SORT;
+    sprintf(time_dinam_c, "%f", time_dinam);
+    sprintf(mem_dinam_c, "%d", mem_dinam);
 
     printf("    Результаты сравнения разных симуляций (время в тактах процессора, память в байтах):\n");
     ft_u8write_ln(table, "?", "статический массив", "односвязный список", "%");

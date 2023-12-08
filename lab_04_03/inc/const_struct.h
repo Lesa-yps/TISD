@@ -20,7 +20,7 @@
 #define ERROR_USER -2
 
 // Ограничение на размер стека
-#define MAX_COUNT_ELEM_STAT 10000
+#define MAX_COUNT_ELEM_STAT 5000
 #define MAX_COUNT_ELEM_DIN 80000
 
 #define SIZE_OF_STR 1024
