@@ -15,7 +15,7 @@ int simulate_dinam(int own, struct Inf_stack *infa_q1)
     struct Del_adresses del_adress;
     del_adress.count = 0;
     int user = NEITRAL_USER;
-    // создать массив - стек
+    // указатель на голову стека
     struct Node* head = NULL;
     zero_inf_q(infa_q1);
     while (user != 0)

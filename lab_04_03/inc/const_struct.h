@@ -22,8 +22,8 @@
 // Ограничение на размер стека
 #define MAX_COUNT_ELEM_STAT 5000
 #define MAX_COUNT_ELEM_DIN 80000
-
-#define SIZE_OF_STR 1024
+// Ограничение на размер строки
+#define SIZE_OF_STR 256
 
 // Структура информация
 struct Inf_stack

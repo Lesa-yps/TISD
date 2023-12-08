@@ -11,7 +11,7 @@ int simulate_stat(int own, struct Inf_stack *infa_q1)
 {
     int rc = OK;
     int user = NEITRAL_USER;
-    // создать массив - стек
+    // статический стек
     char Stack[MAX_COUNT_ELEM_STAT][SIZE_OF_STR];
     zero_inf_q(infa_q1);
     while (user != 0)
@@ -45,7 +45,7 @@ int simulate_stat(int own, struct Inf_stack *infa_q1)
         }
         else if (user == 1)
         {
-            char *strk = calloc(SIZE_OF_STR, sizeof(char));
+            char *strk = calloc(SIZE_OF_STR + 2, sizeof(char));
             printf("Введите добавляемый элемент: ");
             while (scanf("%s", strk) != 1 || (clean_buf() != 0) || strlen(strk) == 0 || strlen(strk) > SIZE_OF_STR)
                 printf("Ошибка ввода! Повторите ввод слова: ");
