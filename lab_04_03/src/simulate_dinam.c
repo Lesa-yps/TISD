@@ -1,17 +1,19 @@
 #include "simulate_dinam.h"
 
-int pop_din(struct Node** head, struct Inf_stack *infa_q1, char *strk[], int talk);
+int pop_din(struct Node** head, struct Inf_stack *infa_q1, char *strk[], struct Del_adresses *del_adress);
 int push_din(struct Inf_stack *infa_q1, struct Node **head, char *strk);
 
 void read_din(struct Node *head);
-void work_din(struct Node **head, struct Inf_stack *infa_q1, int own, int talk);
+void work_din(struct Node **head, struct Inf_stack *infa_q1, int own, struct Del_adresses *del_adress);
 
 void free_one_din(char **app_del);
 void free_stack_din(struct Node *head);
 
-int simulate_dinam(int talk, int own, struct Inf_stack *infa_q1)
+int simulate_dinam(int own, struct Inf_stack *infa_q1)
 {
     int rc = OK;
+    struct Del_adresses del_adress;
+    del_adress.count = 0;
     int user = NEITRAL_USER;
     // создать массив - стек
     struct Node* head = NULL;
@@ -24,8 +26,9 @@ int simulate_dinam(int talk, int own, struct Inf_stack *infa_q1)
             printf("1 - добавить элемент в стек\n\
 2 - удалить элемент из стека\n\
 3 - вывести текущее состояние стека\n\
-4 - вывести числа в обратном порядке из стека (после этого он будет очищен)\n\
-0 - завершить выполнение программы\n\
+4 - вывести слова задом наперёд в обратном порядке из стека (после этого он будет очищен)\n\
+5 - вывести список удалённых адресов\n\
+0 - завершить выполнение данной реализации\n\
 Введите цифру, соответствующую выбранному пункту меню: ");
         }
         if (own)
@@ -36,7 +39,7 @@ int simulate_dinam(int talk, int own, struct Inf_stack *infa_q1)
                 rc = push_din(infa_q1, &head, num);
             }
             if (rc == OK)
-                work_din(&head, infa_q1, 0, 0);
+                work_din(&head, infa_q1, 0, &del_adress);
             user = 0;
         }
         else if (scanf("%d", &user) != 1 || user < 0 || user > 4)
@@ -57,14 +60,16 @@ int simulate_dinam(int talk, int own, struct Inf_stack *infa_q1)
         else if (user == 2)
         {
             char *strk;
-            rc = pop_din(&head, infa_q1, &strk, talk);
+            rc = pop_din(&head, infa_q1, &strk, &del_adress);
             if (rc == OK)
                 printf("Вы удалили элемент х = %s.\n", strk);
         }
         else if (user == 3)
             read_din(head);
         else if (user == 4)
-            work_din(&head, infa_q1, 1, talk);
+            work_din(&head, infa_q1, 1, &del_adress);
+        else if (user == 5)
+             print_del_add(del_adress);
         else if (user == 0)
              printf("Завершение работы данной реализации ^-^\n");
     }
@@ -72,7 +77,7 @@ int simulate_dinam(int talk, int own, struct Inf_stack *infa_q1)
     return rc;
 }
 
-int pop_din(struct Node** head, struct Inf_stack *infa_q1, char **strk, int talk)
+int pop_din(struct Node** head, struct Inf_stack *infa_q1, char **strk, struct Del_adresses *del_adress)
 {
     int rc = OK;
     struct Node *tmp;
@@ -80,7 +85,8 @@ int pop_din(struct Node** head, struct Inf_stack *infa_q1, char **strk, int talk
     {
         tmp = *head;
         *strk = tmp->data;
-        print_ptr("Удалили: ", &tmp->data, talk);
+        del_adress->arr[del_adress->count] = (void *) &tmp->data;
+        del_adress->count++;
         *head = tmp->next;
         free(tmp);
         infa_q1->len_q_now--;
@@ -161,7 +167,7 @@ void read_din(struct Node *head)
     }
 }
 
-void work_din(struct Node **head, struct Inf_stack *infa_q1, int own, int talk)
+void work_din(struct Node **head, struct Inf_stack *infa_q1, int own, struct Del_adresses *del_adress)
 {
     if (*head == NULL)
     {
@@ -172,7 +178,7 @@ void work_din(struct Node **head, struct Inf_stack *infa_q1, int own, int talk)
     while (*head != NULL)
     {
         char *strk;
-        pop_din(head, infa_q1, &strk, talk);
+        pop_din(head, infa_q1, &strk, del_adress);
         if (own)
             print_rev_str(strk);
     }

@@ -1,4 +1,4 @@
-// Талышева Олеся ИУ7-35Б ТИСД Лаб #4_01
+// Талышева Олеся ИУ7-35Б ТИСД Лаб #4_03
 #include <stdio.h>
 #include "const_struct.h"
 #include "simulate_dinam.h"
@@ -6,23 +6,14 @@
 #include "build_res.h"
 #include "help_func.h"
 
-void ask_talk(int *talk)
-{
-    printf("Введите 1, если нужно выводить адреса элементов при удалении из очереди, иначе 0: ");
-    while (scanf("%d", talk) != 1 || (clean_buf() != 0)|| *talk < 0 || *talk > 1)
-        printf("Ошибка ввода! Введите 1 или 0: ");
-    printf("Инструкция принята.\n");
-}
-
 int main(void)
 {
     int rc = OK;
     int user = NEITRAL_USER;
-    int talk;
     int own = 0;
 
     struct Inf_stack infa_q1;
-
+    
     printf("Приветствую, пользователь!\n");
 
     printf("Программа работает со стеком и выполняет операции по добавлению, удалению элементов\n\
@@ -51,15 +42,13 @@ int main(void)
         }
         else if (user == 1)
         {
-             ask_talk(&talk);
              printf("    Статическая симуляция запущена...\n");
-             rc = simulate_stat(talk, own, &infa_q1);
+             rc = simulate_stat(own, &infa_q1);
         }
         else if (user == 2)
         {
-             ask_talk(&talk);
              printf("    Динамическая симуляция запущена...\n");
-             rc = simulate_dinam(talk, own, &infa_q1);
+             rc = simulate_dinam(own, &infa_q1);
         }
         else if (user == 3)
              rc = build_res();

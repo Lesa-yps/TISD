@@ -20,7 +20,7 @@
 #define ERROR_USER -2
 
 // Ограничение на размер стека
-#define MAX_COUNT_ELEM_STAT 1000
+#define MAX_COUNT_ELEM_STAT 10000
 #define MAX_COUNT_ELEM_DIN 80000
 
 #define SIZE_OF_STR 1024
@@ -38,6 +38,13 @@ struct Node
 {
     char *data; // данные
     struct Node *next;   // Указатель на следующий элемент односвязного списка
+};
+
+// структура удалённых адресов
+struct Del_adresses
+{
+    void *arr[MAX_COUNT_ELEM_DIN]; // массив
+    int count; // количество
 };
 
 #endif // CONST_STRUCT_H

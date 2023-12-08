@@ -29,7 +29,6 @@ char *perc_int(int time1, int time2, char buffer[])
 int build_res()
 {
     int rc = OK;
-    int talk = 0;
     ft_table_t *table = ft_create_table();
 
     char buffer[SIZE_OF_BUF];
@@ -59,7 +58,7 @@ int build_res()
     // прогон симуляции со статическим массивом
     for (int i = 0; i < COUNT_SORT; i++)
     {
-        rc = simulate_stat(talk, count_elems, &infa_q1);
+        rc = simulate_stat(count_elems, &infa_q1);
         if (rc == ERROR)
             return rc;
         mem_static += (int) (infa_q1.len_strk_max * sizeof(char));
@@ -73,7 +72,7 @@ int build_res()
     // прогон симуляции с односвязным списком
     for (int i = 0; i < COUNT_SORT; i++)
     {
-        rc = simulate_dinam(talk, count_elems, &infa_q1);
+        rc = simulate_dinam(count_elems, &infa_q1);
         if (rc == ERROR)
             return rc;
         mem_dinam += (int) (infa_q1.len_q_max * sizeof(struct Node) + infa_q1.len_strk_max * sizeof(char));

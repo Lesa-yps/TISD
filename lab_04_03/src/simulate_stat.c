@@ -1,13 +1,13 @@
 #include "simulate_stat.h"
 
-int pop_stat(char Stack1[][SIZE_OF_STR], struct Inf_stack *infa_q1, char *strk[], int talk);
+int pop_stat(char Stack1[][SIZE_OF_STR], struct Inf_stack *infa_q1, char *strk[]);
 // добавляем пришедшую заявку в очередь
 int push_stat(struct Inf_stack *infa_q1, char Stack1[][SIZE_OF_STR], char *strk);
 
 void read_stack(char Stack1[][SIZE_OF_STR], struct Inf_stack *infa_q1);
-void work_stat(char Stack1[][SIZE_OF_STR], struct Inf_stack *infa_q1, int own, int talk);
+void work_stat(char Stack1[][SIZE_OF_STR], struct Inf_stack *infa_q1, int own);
 
-int simulate_stat(int talk, int own, struct Inf_stack *infa_q1)
+int simulate_stat(int own, struct Inf_stack *infa_q1)
 {
     int rc = OK;
     int user = NEITRAL_USER;
@@ -22,8 +22,8 @@ int simulate_stat(int talk, int own, struct Inf_stack *infa_q1)
             printf("1 - добавить элемент в стек\n\
 2 - удалить элемент из стека\n\
 3 - вывести текущее состояние стека\n\
-4 - вывести числа в обратном порядке из стека (после этого он будет очищен)\n\
-0 - завершить выполнение программы\n\
+4 - вывести слова задом наперёд в обратном порядке из стека (после этого он будет очищен)\n\
+0 - завершить выполнение данной реализации\n\
 Введите цифру, соответствующую выбранному пункту меню: ");
         }
         if (own)
@@ -34,7 +34,7 @@ int simulate_stat(int talk, int own, struct Inf_stack *infa_q1)
                 rc = push_stat(infa_q1, Stack, num);
             }
             if (rc == OK)
-                work_stat(Stack, infa_q1, 0, 0);
+                work_stat(Stack, infa_q1, 0);
             user = 0;
         }
         else if (scanf("%d", &user) != 1 || user < 0 || user > 4)
@@ -55,21 +55,21 @@ int simulate_stat(int talk, int own, struct Inf_stack *infa_q1)
         else if (user == 2)
         {
             char *strk;
-            rc = pop_stat(Stack, infa_q1, &strk, talk);
+            rc = pop_stat(Stack, infa_q1, &strk);
             if (rc == OK)
                 printf("Вы удалили элемент х = %s.\n", strk);
         }
         else if (user == 3)
             read_stack(Stack, infa_q1);
         else if (user == 4)
-            work_stat(Stack, infa_q1, 1, talk);
+            work_stat(Stack, infa_q1, 1);
         else if (user == 0)
              printf("Завершение работы данной реализации ^-^\n");
     }
     return rc;
 }
 
-int pop_stat(char Stack1[][SIZE_OF_STR], struct Inf_stack *infa_q1, char *strk[], int talk)
+int pop_stat(char Stack1[][SIZE_OF_STR], struct Inf_stack *infa_q1, char *strk[])
 {
     if (infa_q1->len_q_now == 0)
     {
@@ -77,7 +77,6 @@ int pop_stat(char Stack1[][SIZE_OF_STR], struct Inf_stack *infa_q1, char *strk[]
         return ERROR;
     }
     *strk = Stack1[MAX_COUNT_ELEM_STAT - infa_q1->len_q_now];
-    print_ptr("Удалили: ", strk, talk);
     infa_q1->len_q_now--;
     return OK;
 }
@@ -111,7 +110,7 @@ void read_stack(char Stack1[][SIZE_OF_STR], struct Inf_stack *infa_q1)
         printf("Стек пуст!\n");
 }
 
-void work_stat(char Stack1[][SIZE_OF_STR], struct Inf_stack *infa_q1, int own, int talk)
+void work_stat(char Stack1[][SIZE_OF_STR], struct Inf_stack *infa_q1, int own)
 {
     char *x;
     if (infa_q1->len_q_now == 0)
@@ -122,7 +121,7 @@ void work_stat(char Stack1[][SIZE_OF_STR], struct Inf_stack *infa_q1, int own, i
     }
     while (infa_q1->len_q_now != 0)
     {
-        pop_stat(Stack1, infa_q1, &x, talk);
+        pop_stat(Stack1, infa_q1, &x);
         if (own)
             print_rev_str(x);
     }

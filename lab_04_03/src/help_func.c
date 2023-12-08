@@ -16,10 +16,13 @@ int diff_time(double time1, double time2)
     return 1;
 }
 
-void print_ptr(char *strk, char **del, int talk)
+void print_del_add(struct Del_adresses del_adress)
 {
-    if (talk)
-        printf("   %s %p %s\n", strk, (void *) del, *del);
+    if (del_adress.count == 0)
+        printf("Ещё ни одного элемента не было удалено!\n");
+    else
+        for (int i = 0; i < del_adress.count; i++)
+            printf("%p\n", del_adress.arr[i]);
 }
 
 int clean_buf(void)

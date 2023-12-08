@@ -6,6 +6,6 @@
 
 #include <string.h>
 
-int simulate_dinam(int talk, int own, struct Inf_stack *infa_q1);
+int simulate_dinam(int own, struct Inf_stack *infa_q1);
 
 #endif // SIMULATE_DINAM_H

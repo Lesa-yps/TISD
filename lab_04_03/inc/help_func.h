@@ -13,7 +13,7 @@ void zero_inf_q(struct Inf_stack *inf_q1);
 
 int diff_time(double time1, double time2);
 
-void print_ptr(char *strk, char **del, int talk);
+void print_del_add(struct Del_adresses del_adress);
 
 void read_int(int *num, int mini, int maxi);
 int clean_buf(void);

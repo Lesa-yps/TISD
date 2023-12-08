@@ -188,10 +188,10 @@ void node_to_dot(struct Node *tree, void *param)
     FILE *f = param;
 
     if (tree->left)
-        fprintf(f, "%d -> %d;\n", tree->data, tree->left->data);
+        fprintf(f, "%d -> %d [color = blue];\n", tree->data, tree->left->data);
 
     if (tree->right)
-        fprintf(f, "%d -> %d;\n", tree->data, tree->right->data);
+        fprintf(f, "%d -> %d [color = red];\n", tree->data, tree->right->data);
 }
 void btree_apply_pre(struct Node *tree, ptr_action_t f, void *arg)
 {

@@ -6,6 +6,6 @@
 
 #include <string.h>
 
-int simulate_stat(int talk, int own, struct Inf_stack *infa_q1);
+int simulate_stat(int own, struct Inf_stack *infa_q1);
 
 #endif // SIMULATE_STAT_H
