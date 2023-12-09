@@ -16,7 +16,7 @@
 #define MIN(x,y) (((x) < (y)) ? (x) : (y))
 
 // количество замеров
-#define COUNT_SORT 15
+#define COUNT_SORT 20
 
 // нейтральное значение числа - выбранного пункта меню
 #define NEITRAL_USER -1

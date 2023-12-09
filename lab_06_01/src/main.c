@@ -134,6 +134,14 @@ int main(void)
             while (scanf("%d", &num) != 1)
                 printf("Ошибка! Повторите ввод: ");
             file_add_elem(file, num);
+            struct Node *Head_tree_tmp = tree_add_elem(Head_tree, num, 1);
+            if (Head_tree_tmp == NULL)
+                printf("Ошибка выделения памяти!\n");
+            else
+            {
+                Head_tree = Head_tree_tmp;
+                printf("Добавили.\n");
+            }
         }
         else if (user == 7) // выбрать новый файл для работы (дерево тоже перезапишется)
         {
