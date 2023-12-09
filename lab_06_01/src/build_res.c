@@ -24,14 +24,6 @@ char *perc_int(int time1, int time2, char buffer[])
     return buffer;
 }
 
-int f_rand_add(void)
-{
-    int x = MIN_X;
-    while (x <= MAX_X && x >= MIN_X)
-        x = MIN_X_ADD + rand() / (RAND_MAX / (MAX_X_ADD - MIN_X_ADD + 1) + 1);
-    return x;
-}
-
 // заполняет файл числами
 void fill_file(char *in_file, char *out_file)
 {
@@ -55,7 +47,7 @@ double clock_add_file(char *strk_file)
     {
         fill_file(strk_file, TEST_FILE_NAME);
         FILE *file = fopen(TEST_FILE_NAME, "a");
-        int x = f_rand_add();
+        int x = 1000000 + i;
         time_start = clock();
         file_add_elem(file, x);
         time_add_file += clock() - time_start;
@@ -75,7 +67,7 @@ double clock_add_tree(char *strk_file)
     double time_add_tree = 0.0;
     for (int i = 0; i < COUNT_SORT; i++)
     {
-        int x = f_rand_add();
+        int x = 1000000 + i;
         time_start = clock();
         tree_add_elem(Head, x, 0);
         time_add_tree += clock() - time_start;

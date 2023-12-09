@@ -13,13 +13,7 @@
 #include "const_struct.h"
 #include "help_func.h"
 
-#define MIN_X -100
-#define MAX_X 100
-
 #define TEST_FILE_NAME "test.txt"
-
-#define MIN_X_ADD -1024
-#define MAX_X_ADD 1024
 
 // Сравнивается эффективность алгоритмов добавления чисел в файл и в дерево
 int build_res_add(void);
