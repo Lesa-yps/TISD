@@ -1,0 +1,283 @@
+Kovalev
+Math Puzzles for Cats
+PetsPress
+301
+2
+роман
+Martinez
+Children's Book
+KidsBooks
+620
+3
+2
+сказки
+Liu
+Children's Picture Book
+KidsBooks
+120
+3
+3
+стихи
+Yamamoto
+Nuclear Physics for Kids
+KidsBooks
+7234
+3
+5
+сказки
+Volkov
+Space Poetry
+SpacePoetryPress
+2130
+3
+2
+стихи
+Davis
+Children's Stories
+KidsBooks
+910
+3
+4
+стихи
+Chang
+Zen Philosophy
+PhilosophyBooks
+90
+1
+Philosophy
+отечественная
+2021
+Petrov
+The Silent Song
+PoetryHouse
+1010
+2
+поэзия
+Sato
+Gourmet Insects Cookbook
+CulinaryExperiments
+100
+1
+Culinary
+отечественная
+2023
+Park
+Short Stories
+FictionBooks
+1210
+3
+4
+сказки
+Popov
+Art of Origami
+ArtCrafts
+1100
+1
+Art
+отечественная
+2022
+Brown
+Cooking Recipes
+CulinaryWorld
+20
+2
+пьеса
+Ito
+Horror Manga
+MangaPublishing
+120
+2
+поэзия
+Lopez
+Adventure Stories
+FictionBooks
+130
+3
+6
+стихи
+Martinez
+Cookbook
+CulinaryPress
+140
+3
+5
+сказки
+Xiang
+Haunted House Guide
+SupernaturalBooks
+50
+1
+Paranormal
+отечественная
+2019
+Sidorov
+Fairy Tales for Kids
+KidsPress
+1503
+3
+3
+сказки
+Hernandez
+Biography
+BiographyBooks
+160
+1
+Biography
+переводная
+2021
+Perez
+Romantic Novel
+FictionBooks
+1020
+2
+роман
+Lee
+Poetry Anthology
+PoetryHouse
+180
+2
+поэзия
+Johnson
+History of Art
+ArtPress
+180
+3
+5
+сказки
+Wang
+Travel Stories
+TravelPress
+190
+2
+пьеса
+Ryu
+Extreme Sports Chronicles
+SportsPress
+190
+2
+пьеса
+Lopez
+Travel Memoirs
+TravelPress
+200
+3
+5
+сказки
+Torres
+Historical Non-Fiction
+HistoryPress
+220
+2
+роман
+Gonzalez
+Historical Novel
+HistoryPress
+220
+2
+поэзия
+Zhang
+Mathematics Guide
+SciencePress
+240
+1
+Mathematics
+отечественная
+2019
+Rodriguez
+Art History
+ArtPress
+350
+1
+Art
+отечественная
+2018
+Smith
+Mystery Novel
+FictionBooks
+250
+2
+роман
+Li
+Fantasy Novel
+FictionBooks
+290
+1
+Fantasy
+переводная
+2017
+Smith
+Alien Encounters
+SciFiPublishing
+200
+3
+4
+сказки
+Miller
+Science Fiction
+SciFiPublishing
+10
+2
+роман
+Kim
+Chemistry Basics
+SciencePress
+280
+1
+Chemistry
+переводная
+2019
+Gomez
+Physics Fundamentals
+SciencePress
+210
+1
+Physics
+отечественная
+2022
+Ivanov
+Engineering Basics
+SciencePress
+300
+1
+Mechanics
+отечественная
+2015
+Chen
+Astronomy Guide
+SciencePress
+20
+1
+Astronomy
+отечественная
+2020
+Garcia
+Science Fiction
+SciFiPublishing
+330
+2
+роман
+Williams
+Space Exploration
+SpaceBooks
+350
+1
+Astronomy
+отечественная
+2018
+Diaz
+Computer Science Handbook
+TechWorld
+1000
+1
+Computer Science
+отечественная
+2020
+Orlov
+Advanced Robotics
+TechWorld
+420
+1
+Robotics
+переводная
+2020
+

@@ -1,0 +1,704 @@
+Miller
+Science Fiction
+SciFiPublishing
+10
+2
+роман
+Miller
+Science Fiction
+SciFiPublishing
+10
+2
+роман
+Chen
+Astronomy Guide
+SciencePress
+20
+1
+Astronomy
+отечественная
+2020
+Brown
+Cooking Recipes
+CulinaryWorld
+20
+2
+пьеса
+Chen
+Astronomy Guide
+SciencePress
+20
+1
+Astronomy
+отечественная
+2020
+Brown
+Cooking Recipes
+CulinaryWorld
+20
+2
+пьеса
+Brown
+Cooking Recipes
+CulinaryWorld
+20
+2
+пьеса
+Xiang
+Haunted House Guide
+SupernaturalBooks
+50
+1
+Paranormal
+отечественная
+2019
+Xiang
+Haunted House Guide
+SupernaturalBooks
+50
+1
+Paranormal
+отечественная
+2019
+Xiang
+Haunted House Guide
+SupernaturalBooks
+50
+1
+Paranormal
+отечественная
+2019
+Chang
+Zen Philosophy
+PhilosophyBooks
+90
+1
+Philosophy
+отечественная
+2021
+Chang
+Zen Philosophy
+PhilosophyBooks
+90
+1
+Philosophy
+отечественная
+2021
+Chang
+Zen Philosophy
+PhilosophyBooks
+90
+1
+Philosophy
+отечественная
+2021
+Sato
+Gourmet Insects Cookbook
+CulinaryExperiments
+100
+1
+Culinary
+отечественная
+2023
+Sato
+Gourmet Insects Cookbook
+CulinaryExperiments
+100
+1
+Culinary
+отечественная
+2023
+Sato
+Gourmet Insects Cookbook
+CulinaryExperiments
+100
+1
+Culinary
+отечественная
+2023
+Ito
+Horror Manga
+MangaPublishing
+120
+2
+поэзия
+Liu
+Children's Picture Book
+KidsBooks
+120
+3
+3
+стихи
+Ito
+Horror Manga
+MangaPublishing
+120
+2
+поэзия
+Liu
+Children's Picture Book
+KidsBooks
+120
+3
+3
+стихи
+Ito
+Horror Manga
+MangaPublishing
+120
+2
+поэзия
+Liu
+Children's Picture Book
+KidsBooks
+120
+3
+3
+стихи
+Lopez
+Adventure Stories
+FictionBooks
+130
+3
+6
+стихи
+Lopez
+Adventure Stories
+FictionBooks
+130
+3
+6
+стихи
+Lopez
+Adventure Stories
+FictionBooks
+130
+3
+6
+стихи
+Martinez
+Cookbook
+CulinaryPress
+140
+3
+5
+сказки
+Martinez
+Cookbook
+CulinaryPress
+140
+3
+5
+сказки
+Martinez
+Cookbook
+CulinaryPress
+140
+3
+5
+сказки
+Hernandez
+Biography
+BiographyBooks
+160
+1
+Biography
+переводная
+2021
+Hernandez
+Biography
+BiographyBooks
+160
+1
+Biography
+переводная
+2021
+Hernandez
+Biography
+BiographyBooks
+160
+1
+Biography
+переводная
+2021
+Lee
+Poetry Anthology
+PoetryHouse
+180
+2
+поэзия
+Johnson
+History of Art
+ArtPress
+180
+3
+5
+сказки
+Johnson
+History of Art
+ArtPress
+180
+3
+5
+сказки
+Lee
+Poetry Anthology
+PoetryHouse
+180
+2
+поэзия
+Ryu
+Extreme Sports Chronicles
+SportsPress
+190
+2
+пьеса
+Wang
+Travel Stories
+TravelPress
+190
+2
+пьеса
+Wang
+Travel Stories
+TravelPress
+190
+2
+пьеса
+Ryu
+Extreme Sports Chronicles
+SportsPress
+190
+2
+пьеса
+Smith
+Alien Encounters
+SciFiPublishing
+200
+3
+4
+сказки
+Lopez
+Travel Memoirs
+TravelPress
+200
+3
+5
+сказки
+Smith
+Alien Encounters
+SciFiPublishing
+200
+3
+4
+сказки
+Lopez
+Travel Memoirs
+TravelPress
+200
+3
+5
+сказки
+Gomez
+Physics Fundamentals
+SciencePress
+210
+1
+Physics
+отечественная
+2022
+Gomez
+Physics Fundamentals
+SciencePress
+210
+1
+Physics
+отечественная
+2022
+Gonzalez
+Historical Novel
+HistoryPress
+220
+2
+поэзия
+Torres
+Historical Non-Fiction
+HistoryPress
+220
+2
+роман
+Gonzalez
+Historical Novel
+HistoryPress
+220
+2
+поэзия
+Torres
+Historical Non-Fiction
+HistoryPress
+220
+2
+роман
+Zhang
+Mathematics Guide
+SciencePress
+240
+1
+Mathematics
+отечественная
+2019
+Zhang
+Mathematics Guide
+SciencePress
+240
+1
+Mathematics
+отечественная
+2019
+Smith
+Mystery Novel
+FictionBooks
+250
+2
+роман
+Smith
+Mystery Novel
+FictionBooks
+250
+2
+роман
+Kim
+Chemistry Basics
+SciencePress
+280
+1
+Chemistry
+переводная
+2019
+Kim
+Chemistry Basics
+SciencePress
+280
+1
+Chemistry
+переводная
+2019
+Li
+Fantasy Novel
+FictionBooks
+290
+1
+Fantasy
+переводная
+2017
+Li
+Fantasy Novel
+FictionBooks
+290
+1
+Fantasy
+переводная
+2017
+Ivanov
+Engineering Basics
+SciencePress
+300
+1
+Mechanics
+отечественная
+2015
+Ivanov
+Engineering Basics
+SciencePress
+300
+1
+Mechanics
+отечественная
+2015
+Kovalev
+Math Puzzles for Cats
+PetsPress
+301
+2
+роман
+Kovalev
+Math Puzzles for Cats
+PetsPress
+301
+2
+роман
+Kovalev
+Math Puzzles for Cats
+PetsPress
+301
+2
+роман
+Kovalev
+Math Puzzles for Cats
+PetsPress
+301
+2
+роман
+Garcia
+Science Fiction
+SciFiPublishing
+330
+2
+роман
+Garcia
+Science Fiction
+SciFiPublishing
+330
+2
+роман
+Rodriguez
+Art History
+ArtPress
+350
+1
+Art
+отечественная
+2018
+Williams
+Space Exploration
+SpaceBooks
+350
+1
+Astronomy
+отечественная
+2018
+Williams
+Space Exploration
+SpaceBooks
+350
+1
+Astronomy
+отечественная
+2018
+Rodriguez
+Art History
+ArtPress
+350
+1
+Art
+отечественная
+2018
+Orlov
+Advanced Robotics
+TechWorld
+420
+1
+Robotics
+переводная
+2020
+Orlov
+Advanced Robotics
+TechWorld
+420
+1
+Robotics
+переводная
+2020
+Martinez
+Children's Book
+KidsBooks
+620
+3
+2
+сказки
+Martinez
+Children's Book
+KidsBooks
+620
+3
+2
+сказки
+Martinez
+Children's Book
+KidsBooks
+620
+3
+2
+сказки
+Martinez
+Children's Book
+KidsBooks
+620
+3
+2
+сказки
+Davis
+Children's Stories
+KidsBooks
+910
+3
+4
+стихи
+Davis
+Children's Stories
+KidsBooks
+910
+3
+4
+стихи
+Davis
+Children's Stories
+KidsBooks
+910
+3
+4
+стихи
+Diaz
+Computer Science Handbook
+TechWorld
+1000
+1
+Computer Science
+отечественная
+2020
+Diaz
+Computer Science Handbook
+TechWorld
+1000
+1
+Computer Science
+отечественная
+2020
+Petrov
+The Silent Song
+PoetryHouse
+1010
+2
+поэзия
+Petrov
+The Silent Song
+PoetryHouse
+1010
+2
+поэзия
+Petrov
+The Silent Song
+PoetryHouse
+1010
+2
+поэзия
+Perez
+Romantic Novel
+FictionBooks
+1020
+2
+роман
+Perez
+Romantic Novel
+FictionBooks
+1020
+2
+роман
+Popov
+Art of Origami
+ArtCrafts
+1100
+1
+Art
+отечественная
+2022
+Popov
+Art of Origami
+ArtCrafts
+1100
+1
+Art
+отечественная
+2022
+Popov
+Art of Origami
+ArtCrafts
+1100
+1
+Art
+отечественная
+2022
+Park
+Short Stories
+FictionBooks
+1210
+3
+4
+сказки
+Park
+Short Stories
+FictionBooks
+1210
+3
+4
+сказки
+Park
+Short Stories
+FictionBooks
+1210
+3
+4
+сказки
+Sidorov
+Fairy Tales for Kids
+KidsPress
+1503
+3
+3
+сказки
+Sidorov
+Fairy Tales for Kids
+KidsPress
+1503
+3
+3
+сказки
+Sidorov
+Fairy Tales for Kids
+KidsPress
+1503
+3
+3
+сказки
+Volkov
+Space Poetry
+SpacePoetryPress
+2130
+3
+2
+стихи
+Volkov
+Space Poetry
+SpacePoetryPress
+2130
+3
+2
+стихи
+Volkov
+Space Poetry
+SpacePoetryPress
+2130
+3
+2
+стихи
+Yamamoto
+Nuclear Physics for Kids
+KidsBooks
+7234
+3
+5
+сказки
+Yamamoto
+Nuclear Physics for Kids
+KidsBooks
+7234
+3
+5
+сказки
+Yamamoto
+Nuclear Physics for Kids
+KidsBooks
+7234
+3
+5
+сказки

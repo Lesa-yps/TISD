@@ -1,0 +1,17 @@
+digraph visual_graph {
+30 -> -60 [color = blue];
+30 -> 54 [color = red];
+-60 -> -64 [color = blue];
+-60 -> 23 [color = red];
+-64 -> -454 [color = blue];
+23 -> -34 [color = blue];
+54 -> 40 [color = blue];
+54 -> 667 [color = red];
+40 -> 46 [color = red];
+46 -> 45 [color = blue];
+46 -> 50 [color = red];
+667 -> 60 [color = blue];
+667 -> 3417 [color = red];
+60 -> 56 [color = blue];
+60 -> 546 [color = red];
+}
